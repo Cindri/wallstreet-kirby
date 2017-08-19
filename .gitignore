@@ -24,3 +24,6 @@ Icon
 # Avatars
 /assets/avatars/*
 !/assets/avatars/index.html
+
+#PHPStorm files
+/.idea/*
