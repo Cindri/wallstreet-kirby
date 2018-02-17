@@ -30,3 +30,6 @@ Icon
 
 #Content nicht versionieren
 /content/*
+
+#Blueprint examples
+/site/blueprints/examples/*
