@@ -1,0 +1,19 @@
+title:
+  en: Galleries
+  de: Bildergalerien
+
+pages:
+  template: gallery
+
+options:
+  preview: true
+  status: true
+  template: true
+  url: false
+  delete: false
+  icon: suitcase
+
+fields:
+  main_text:
+    label: Text
+    type:  textarea

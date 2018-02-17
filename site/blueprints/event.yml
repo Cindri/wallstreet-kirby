@@ -1,0 +1,20 @@
+title: Event
+
+fields:
+  title:
+    label:
+      en: Site title
+      de: Seiten-Titel
+    type:  text
+
+  event_title:
+      label:
+        en: Event title
+        de: Event-Titel
+      type:  text
+
+  event_text:
+    label:
+      en: Event text
+      de: Event-Text
+    type:  textarea

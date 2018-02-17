@@ -1,0 +1,15 @@
+title:
+  en: Home
+  de: Home
+
+pages:
+  template: galleries
+
+fields:
+  title:
+    label: Title
+    type:  text
+
+  text:
+    label: Text
+    type:  textarea

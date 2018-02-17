@@ -1,0 +1,35 @@
+title:
+  en: Gallery
+  de: Galerie
+
+files:
+  fields:
+    title:
+      label: Bild-Titel
+      type: text
+    caption:
+      label: Bild-Beschriftung
+      type: textarea
+  sortable: true
+  max: 10
+  type: image
+    width: 1600
+    height: 1200
+
+pages: false
+
+fields:
+  title:
+    label:
+      en: Title
+      de: Galerie-Name
+  headline:
+    label:
+      en: Text heading
+      de: Textüberschrift
+    type: text
+  caption:
+    label:
+      en: Gallery text
+      de: Galerie-Text
+    type: textarea
