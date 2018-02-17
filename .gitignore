@@ -27,3 +27,6 @@ Icon
 
 #PHPStorm files
 /.idea/*
+
+#Content nicht versionieren
+/content/*
