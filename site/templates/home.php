@@ -17,7 +17,7 @@
 <body class="loadpage home style-v1">
     <div id="wrap">
 
-        <?= snippet('layout/header') ?>
+        <?= snippet('layout/header_home') ?>
 
         <div class="main-content" id="main-content">
 
