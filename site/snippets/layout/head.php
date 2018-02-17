@@ -4,10 +4,9 @@
     <title>Wallstreet im Hamilton</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet"
-          href="http://fonts.googleapis.com/css?family=Playfair+Display:400,700">
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'
-          rel='stylesheet' type='text/css'>
+
+    <?= css('http://fonts.googleapis.com/css?family=Playfair+Display:400,700') ?>
+    <?= css('http://fonts.googleapis.com/css?family=PT+Sans:400,700') ?>
     <?= css('assets/css/animate.css') ?>
     <?= css('assets/css/hover.css') ?>
     <?= css('assets/css/bootstrap.min.css') ?>

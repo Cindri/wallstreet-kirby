@@ -4,6 +4,5 @@
 <?= js('assets/js/vendor/jquery.waypoints.min.js') ?>
 <?= js('assets/js/vendor/bootstrap.min.js') ?>
 <?= js('assets/js/vendor/jquery.nivo.slider.pack.js') ?>
-<?= js('https://maps.googleapis.com/maps/api/js') ?>
 
 <?= js('assets/js/main.js') ?>
