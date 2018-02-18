@@ -9,11 +9,15 @@ options:
   preview: true
   status: true
   template: true
-  url: false
   delete: false
   icon: suitcase
 
 fields:
+  title:
+    label:
+      en: Title
+      de: Titel
+    type: text
   main_text:
     label: Text
     type:  textarea
