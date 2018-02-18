@@ -8,14 +8,14 @@ $mainPages = new Collection();
 foreach ($allPages as $page) {
 
     // Display-Bedingung Season Specials
-    if ($page->num() == 2 || $page->content()->has('seasonspecials')) {
+    if ($page->content()->has('seasonspecials')) {
         if (!$page->content()->seasonspecials()->empty()) {
             $mainPages->append($page->num(), $page);
         }
     }
 
     // Display-Bedingung Powerlunch
-    else if ($page->num() == 3 || $page->content()->has('powerlunch')) {
+    else if ($page->content()->has('powerlunch')) {
         $actualDate = new \DateTime();
         if (!in_array($actualDate->format('l'), ['Saturday', 'Sunday'])) {
             $mainPages->append($page->num(), $page);
@@ -23,7 +23,7 @@ foreach ($allPages as $page) {
     }
 
     // Display-Bedingung Event
-    else if ($page->num() == 7 || $page->content()->has('event_text')) {
+    else if ($page->content()->has('event_text')) {
         if (!$page->content()->event_text()->empty()) {
             $mainPages->append($page->num(), $page);
         }
@@ -35,8 +35,6 @@ foreach ($allPages as $page) {
     }
 
 }
-
-$mainPages->sortBy();
 
 return [
     'mainPages'   => $mainPages

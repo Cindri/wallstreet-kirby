@@ -1,0 +1,14 @@
+title: Powerlunch
+
+fields:
+  title:
+    label:
+      en: Site title
+      de: Seiten-Titel
+    type:  text
+
+  powerlunch:
+    label:
+      en: Powerlunch
+      de: Powerlunch
+    type:  textarea

@@ -1,0 +1,14 @@
+title: Season Specials
+
+fields:
+  title:
+    label:
+      en: Site title
+      de: Seiten-Titel
+    type:  text
+
+  seasonspecials:
+    label:
+      en: Season specials
+      de: Season specials
+    type:  textarea

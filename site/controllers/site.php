@@ -8,7 +8,7 @@
 // https://getkirby.com/docs/developer-guide/advanced/controllers
 
 return function($site, $pages, $page) {
-    
+
     $mainPages = null;
     require_once kirby()->roots()->controllers() . '/shared/MenuController.php';
 
