@@ -19,6 +19,8 @@ c::set('license', 'put your license key here');
 
 c::set('debug', true);
 
+c::set('markdown.extra', true);
+
 /*
 
 ---------------------------------------
@@ -46,3 +48,59 @@ c::set('languages', [
         'url'     => '/en',
     ]
 ]);
+
+$site = site();
+/** @var Page $galleryPage */
+$galleryPage = $site->pages()->find('galerien');
+
+$routes = [];
+
+foreach ($site->languages() as $language) {
+    if ($language->default()) {
+        // Normale Route
+        $newRoute = [];
+        $newRoute['pattern'] = $galleryPage->urlKey($language->code()) . '/(:any)';
+        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
+            $l10nGalleryPageName = $galleryPage->urlKey();
+            $data = [
+                'selectedGallery' => $gallery
+            ];
+            site()->visit($l10nGalleryPageName, $language->code());
+            return array($l10nGalleryPageName, $data);
+        };
+        $routes[] = $newRoute;
+
+        // AJAX Route
+        $newRoute['pattern'] = $galleryPage->urlKey($language->code()) . '/(:any)/ajax';
+        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
+            $l10nGalleryPageName = $galleryPage->urlKey($language->code());
+            return site()->visit($l10nGalleryPageName . '/' . $gallery, $language->code());
+        };
+        $routes[] = $newRoute;
+
+    } else {
+        // Normale Route
+        $newRoute = [];
+        $newRoute['pattern'] = $language->code() . '/' . $galleryPage->urlKey($language->code()) . '/(:any)';
+        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
+            $l10nGalleryPageName = $galleryPage->urlKey();
+            $data = [
+                'selectedGallery' => $gallery
+            ];
+            site()->visit($l10nGalleryPageName, $language->code());
+            return array($l10nGalleryPageName, $data);
+        };
+        $routes[] = $newRoute;
+
+        // AJAX Route
+        $newRoute = [];
+        $newRoute['pattern'] = $language->code() . '/' . $galleryPage->urlKey($language->code()) . '/(:any)/ajax';
+        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
+            $l10nGalleryPageName = $galleryPage->urlKey($language->code());
+            return site()->visit($l10nGalleryPageName . '/' . $gallery, $language->code());
+        };
+        $routes[] = $newRoute;
+    }
+}
+
+c::set('routes', $routes);
