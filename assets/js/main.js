@@ -192,7 +192,7 @@
 					$('body').addClass('loadpage');
 				});
 				$( document ).ajaxStop(function() {
-					//$('body').removeClass('loadpage');
+					$('body').removeClass('loadpage');
 				});
 				
 				$.ajax({
@@ -275,10 +275,10 @@
 			$galleries.on('click', 'a.gallery-ajax', function(e){
 				e.preventDefault();
 				
-				var $this = $(this),
-					$parent = $this.parents('.gallery-item'),
-					$url = $this.attr('data-url');
-				
+				var $this = $(this);
+				var $parent = $this.parents('.gallery-item');
+				var $url = $this.attr('data-url');
+
 				if ( $this.parents('.galleries-v2').length > 0 ) {
 					
 					var $modal = $parent.find('.modal');
@@ -352,15 +352,14 @@
 							$('body').addClass('loadpage');
 						});
 						$( document ).ajaxStop(function() {
-							//$('body').removeClass('loadpage');
+							$('body').removeClass('loadpage');
 						});
 						
 						$.ajax({
 							url: $url,
 							cache: false,
 						}).done(function( html ) {
-							
-							var $element = $(html).find('.gallery');
+							var $element = $(html);
 							
 							$parent.append( $element );
 							
@@ -371,7 +370,6 @@
 							gallery_flickity($parent.find('.gallery-flickity'));
 							
 						})
-						
 						.fail(function() {
 							location.reload();
 						})
