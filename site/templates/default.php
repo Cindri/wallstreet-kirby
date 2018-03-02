@@ -17,11 +17,15 @@
 <body class="loadpage home style-v1">
 <div id="wrap">
 
-    <?= snippet('layout/header_home') ?>
+    <?= snippet('layout/header') ?>
 
     <div class="main-content" id="main-content">
 
-        <h1><?= $page->title() ?></h1>
+        <?php
+        /** @var \Kirby\Panel\Models\Page $page */
+            $pageTemplate = $page->intendedTemplate();
+            print snippet('pages/' . $pageTemplate);
+        ?>
 
     </div>
 

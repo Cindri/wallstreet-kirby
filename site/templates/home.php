@@ -21,7 +21,7 @@
 
         <div class="main-content" id="main-content">
 
-            <?= snippet('pages/content_home')?>
+            <?= snippet('pages/home')?>
 
         </div>
 
