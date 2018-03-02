@@ -1,14 +1,30 @@
 title: Season Specials
 
 fields:
-  title:
-    label:
-      en: Site title
-      de: Seiten-Titel
-    type:  text
 
+  title:
+    label: Seiten-Titel
+    type:  text
   seasonspecials:
-    label:
-      en: Season specials
-      de: Season specials
-    type:  textarea
+    label: Season Specials
+    type: structure
+    style: table
+    entry: >
+      {{name}}: {{price}}
+    default:
+      -
+        name: Platzhalter
+        description: Nur ein Platzhalter
+        price: 0.00
+    fields:
+      name:
+        label: Name der Speise
+        type: text
+      description:
+        label: Beschreibung
+        type: textarea
+        buttons: false
+      price:
+        label: Preis
+        type: number
+        step: .01
