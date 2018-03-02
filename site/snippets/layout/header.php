@@ -1,5 +1,5 @@
 <!-- Header -->
-<header class="header">
+<header id="header" class="header">
     <div class="header-inner">
         <div class="container">
             <!-- Top Header -->
@@ -21,7 +21,7 @@
 
                     <!-- Logo -->
                     <div id="logo" class="col-sm-4 logo col-sm-pull-4">
-                        <a href="index.html"><img alt="The Retation" src="imgs/logo.png"></a>
+                        <a href="index.html"><img alt="The Retation" src="<?= $kirby->urls()->assets() ?>/imgs/logo.png"></a>
                     </div>
 
                 </div>
@@ -29,8 +29,7 @@
 
         </div>
 
-        <? snippet('main_menu'); ?>
+        <?= snippet('layout/main_menu'); ?>
 
     </div>
-
 </header>

@@ -1,0 +1,12 @@
+.section.section-galleries {
+    background-color: #efe6da;
+}
+
+.header-inner {
+    position: initial;
+    background-color: #111111;
+}
+
+li > .dropdown {
+    z-index: 99;
+}

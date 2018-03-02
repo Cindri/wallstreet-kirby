@@ -16,7 +16,18 @@
     <?= css('assets/css/main.css') ?>
     <?= css('assets/css/responsive.css') ?>
     <?= css('assets/css/color/default.css') ?>
+    <?= css('assets/css/custom.css') ?>
 
+
+    <?= js('assets/js/vendor/jquery-1.11.2.min.js') ?>
+    <?= js('assets/js/vendor/imagesloaded.pkgd.min.js') ?>
+    <?= js('assets/js/vendor/flickity.pkgd.min.js') ?>
+    <?= js('assets/js/vendor/jquery.waypoints.min.js') ?>
+    <?= js('assets/js/vendor/bootstrap.min.js') ?>
+    <?= js('assets/js/vendor/jquery.nivo.slider.pack.js') ?>
+    <?= js('assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') ?>
+    <?= js('assets/js/vendor/sticky.min.js') ?>
+    <?= js('assets/js/vendor/isotope.pkgd.min.js') ?>
     <?= js('assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') ?>
 
     <!--
