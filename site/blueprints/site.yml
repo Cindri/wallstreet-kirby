@@ -20,3 +20,9 @@ fields:
       en: Copyright
       de: Rechtliches
     type: textarea
+
+  opening_hours:
+    label:
+      en: Opening hours
+      de: Öffnungszeiten
+    type: textarea
