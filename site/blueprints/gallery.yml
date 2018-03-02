@@ -13,8 +13,6 @@ files:
   sortable: true
   max: 10
   type: image
-    width: 1600
-    height: 1200
 
 pages: false
 
