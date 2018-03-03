@@ -53,54 +53,48 @@ $site = site();
 /** @var Page $galleryPage */
 $galleryPage = $site->pages()->find('galerien');
 
+
 $routes = [];
 
 foreach ($site->languages() as $language) {
-    if ($language->default()) {
-        // Normale Route
-        $newRoute = [];
-        $newRoute['pattern'] = $galleryPage->urlKey($language->code()) . '/(:any)';
-        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
-            $l10nGalleryPageName = $galleryPage->urlKey();
-            $data = [
-                'selectedGallery' => $gallery
-            ];
-            site()->visit($l10nGalleryPageName, $language->code());
-            return array($l10nGalleryPageName, $data);
-        };
-        $routes[] = $newRoute;
 
-        // AJAX Route
-        $newRoute['pattern'] = $galleryPage->urlKey($language->code()) . '/(:any)/ajax';
-        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
-            $l10nGalleryPageName = $galleryPage->urlKey($language->code());
-            return site()->visit($l10nGalleryPageName . '/' . $gallery, $language->code());
-        };
-        $routes[] = $newRoute;
+    // Normale Route
+    $pattern = $galleryPage->urlKey($language->code()) . '/(:any)';
+    $action = function($gallery) use ($galleryPage, $language) {
+        $l10nPage = $galleryPage->urlKey();
+        $data = [
+            'selectedGallery' => $gallery,
+            'ajax' => false
+        ];
+        site()->visit($l10nPage, $language->code());
+        return [$l10nPage, $data];
+    };
 
-    } else {
-        // Normale Route
-        $newRoute = [];
-        $newRoute['pattern'] = $language->code() . '/' . $galleryPage->urlKey($language->code()) . '/(:any)';
-        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
-            $l10nGalleryPageName = $galleryPage->urlKey();
-            $data = [
-                'selectedGallery' => $gallery
-            ];
-            site()->visit($l10nGalleryPageName, $language->code());
-            return array($l10nGalleryPageName, $data);
-        };
-        $routes[] = $newRoute;
-
-        // AJAX Route
-        $newRoute = [];
-        $newRoute['pattern'] = $language->code() . '/' . $galleryPage->urlKey($language->code()) . '/(:any)/ajax';
-        $newRoute['action'] = function($gallery) use ($galleryPage, $language) {
-            $l10nGalleryPageName = $galleryPage->urlKey($language->code());
-            return site()->visit($l10nGalleryPageName . '/' . $gallery, $language->code());
-        };
-        $routes[] = $newRoute;
+    $newRoute['pattern'] = $pattern;
+    $newRoute['action'] = $action;
+    if (!$language->default()) {
+        $newRoute['pattern'] = $language->code() . '/' . $pattern;
     }
+    $routes[] = $newRoute;
+
+    // AJAX Route
+    $pattern = $pattern . '/ajax';
+    $ajaxAction = function($gallery) use ($galleryPage, $language) {
+        $l10nGalleryPageName = $galleryPage->urlKey($language->code());
+        $l10nPage = $l10nGalleryPageName . '/' . $gallery;
+        $data = [
+            'ajax' => true
+        ];
+        $page = site()->visit($l10nPage, $language->code());
+        return [$page, $data];
+    };
+    $newRoute['pattern'] = $pattern;
+    $newRoute['action'] = $ajaxAction;
+    if (!$language->default()) {
+        $newRoute['pattern'] = $language->code() . '/' . $pattern;
+    }
+    $routes[] = $newRoute;
+
 }
 
 c::set('routes', $routes);
