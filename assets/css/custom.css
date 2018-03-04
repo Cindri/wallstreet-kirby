@@ -10,3 +10,49 @@
 li > .dropdown {
     z-index: 99;
 }
+
+.single-gallery {
+    -webkit-transition: opacity 1s ease 1s;
+    transition: opacity 1s ease 1s;
+    opacity: 1;
+    z-index: 3;
+    padding-bottom: 50px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.single-gallery-inner {
+    padding: 50px 0;
+}
+
+.single-gallery-navigation {
+    text-align:center;
+    margin-bottom: 35px;
+    padding: 15px 0;
+}
+
+.button.single-gallery-navigation-link {
+    color: black;
+    border-color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0 25px;
+    line-height: 32px;
+    border: 2px solid;
+    border-top-color: currentcolor;
+    border-right-color: currentcolor;
+    border-bottom-color: currentcolor;
+    border-left-color: currentcolor;
+    background-color: transparent;
+    margin: 0 3px;
+}
+
+.button.single-gallery-navigation-link.active, .button.single-gallery-navigation-link:hover {
+    border-color: #e27900;
+    color: #e27900;
+}
+
+.container-fluid.no-padding {
+    padding:0;
+}

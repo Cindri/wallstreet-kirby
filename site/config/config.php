@@ -49,19 +49,19 @@ c::set('languages', [
     ]
 ]);
 
+// Route-Konfigurationen (für Galerien)
 $site = site();
-/** @var Page $galleryPage */
-$galleryPage = $site->pages()->find('galerien');
-
+/** @var Page $galleryMainPage */
+$galleryMainPage = $site->pages()->find('galerien');
 
 $routes = [];
 
 foreach ($site->languages() as $language) {
 
     // Normale Route
-    $pattern = $galleryPage->urlKey($language->code()) . '/(:any)';
-    $action = function($gallery) use ($galleryPage, $language) {
-        $l10nPage = $galleryPage->urlKey();
+    $pattern = $galleryMainPage->urlKey($language->code()) . '/(:any)';
+    $action = function($gallery) use ($galleryMainPage, $language) {
+        $l10nPage = $galleryMainPage->children()->find($gallery);
         $data = [
             'selectedGallery' => $gallery,
             'ajax' => false
@@ -79,8 +79,8 @@ foreach ($site->languages() as $language) {
 
     // AJAX Route
     $pattern = $pattern . '/ajax';
-    $ajaxAction = function($gallery) use ($galleryPage, $language) {
-        $l10nGalleryPageName = $galleryPage->urlKey($language->code());
+    $ajaxAction = function($gallery) use ($galleryMainPage, $language) {
+        $l10nGalleryPageName = $galleryMainPage->urlKey($language->code());
         $l10nPage = $l10nGalleryPageName . '/' . $gallery;
         $data = [
             'ajax' => true
