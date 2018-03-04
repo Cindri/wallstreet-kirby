@@ -1,0 +1,59 @@
+title:
+  de: Speisen-Kapitel
+  en: Food chapter
+
+fields:
+
+  title:
+    label:
+      de: Kapitel-Überschrift
+      en: Chapter title
+    type:  text
+
+  chapter_image:
+    label:
+      de: Kapitel-Bild
+      en: Chapter image
+    type: image
+
+  chapter_text:
+    label:
+      de: Kapitel-Text
+      en: Chapter text
+
+  items:
+    label: Speisen
+    type: structure
+    style: table
+    entry: >
+      {{name}}: {{price}}
+    default:
+      -
+        name: Platzhalter
+        description: Nur ein Platzhalter
+        price: 0.00
+        image: null
+    fields:
+      name:
+        label: Name der Speise
+        type: text
+      description:
+        label: Beschreibung
+        type: textarea
+        buttons: false
+      price:
+        label: Preis
+        type: number
+        step: .01
+      image:
+        label: Bild der Speise
+        type: image
+
+options:
+  status: false
+
+pages: false
+
+files: false
+
+icon: cutlery

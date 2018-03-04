@@ -1,0 +1,28 @@
+title:
+  de: Speisen
+  en: Food
+
+fields:
+
+  title:
+    label:
+      de: Seiten-Titel
+      en: Page title
+    type:  text
+
+  main_image:
+    label:
+      de: Haupt-Bild Speisen
+      en: Main image food
+    type: image
+
+pages:
+  template: food_chapter
+
+options:
+  preview: true
+  status: true
+  template: false
+  delete: false
+
+icon: cutlery
