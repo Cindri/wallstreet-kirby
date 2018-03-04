@@ -28,3 +28,7 @@ fields:
         label: Preis
         type: number
         step: .01
+
+icon: star
+pages: false
+files: false

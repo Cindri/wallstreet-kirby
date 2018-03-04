@@ -21,3 +21,5 @@ fields:
   main_text:
     label: Text
     type:  textarea
+
+icon: picture-o

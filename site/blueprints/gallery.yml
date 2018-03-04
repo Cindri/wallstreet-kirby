@@ -31,3 +31,5 @@ fields:
       en: Gallery text
       de: Galerie-Text
     type: textarea
+
+icon: picture-o
