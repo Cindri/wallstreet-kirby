@@ -2,9 +2,11 @@
 /** @var \Kirby\Panel\Models\Page $page */
 ?>
 <div class="page-header">
-    <figure class="post-thumbnail">
-        <img src="assets/images/menus/menus.jpg"/>
-    </figure>
+        <?php if ($image = $page->main_image()->toFile()): ?>
+        <figure class="post-thumbnail">
+            <img src="<?= $image->url() ?>" />
+        </figure>
+        <?php endif ?>
     <h1 class="title">
         <span class="line-title"><?= $page->title() ?><i class="fa"></i></span>
     </h1>
@@ -15,23 +17,23 @@
             <div class="filter-sticky" style="">
                 <div id="filter" class="filter">
                     <button class="button" data-filter="*"><?= l::get('all') ?></button>
-                    <?php foreach ($page->children() as $foodChapter): ?>
+                    <?php foreach ($page->children() as $chapter): ?>
                         <button class="button"
-                                data-filter=".<?= $foodChapter->uid() ?>"><?= $foodChapter->title() ?></button>
+                                data-filter=".<?= $chapter->uid() ?>"><?= $chapter->title() ?></button>
                     <?php endforeach ?>
                 </div>
             </div>
             <div class="menus-inner">
                 <?php
                 $i = 0;
-                /** @var \Kirby\Panel\Models\Page $foodChapter */
-                foreach ($page->children() as $foodChapter):
+                /** @var \Kirby\Panel\Models\Page $chapter */
+                foreach ($page->children() as $chapter):
                     ?>
-                    <section id="<?= $foodChapter->uid() ?>" class="section menu-item <?= $foodChapter->uid() ?>">
+                    <section id="<?= $chapter->uid() ?>" class="section menu-item <?= $chapter->uid() ?>">
                         <div class="row">
                             <div class="col-sm-6 <?php e(($i % 2 != 0), 'col-sm-push-6', '') ?>">
-                                <h1 class="title"><?= $foodChapter->title() ?></h1>
-                                <?php if (!empty($image = $foodChapter->chapter_image()->toFile())) : ?>
+                                <h1 class="title"><?= $chapter->title() ?></h1>
+                                <?php if (!empty($image = $chapter->chapter_image()->toFile())) : ?>
                                     <figure class="menu-thumbnail">
                                         <img src="<?= $image->url() ?>"/>
                                     </figure>
@@ -40,7 +42,7 @@
                             <div class="col-sm-6 <?php e(($i % 2 != 0), 'col-sm-pull-6', '') ?>">
                                 <div class="menu-inner">
                                     <?php
-                                    if (!empty($items = $foodChapter->items()->toStructure())):
+                                    if (!empty($items = $chapter->items()->toStructure())):
                                         $x = 0; foreach ($items as $meal):
                                             ?>
                                             <aside class="clearfix animated animation-delay-<?= (25 * $x) ?> <?php e(($i % 2 != 0), 'fadeInLeft', 'fadeInRight') ?>"

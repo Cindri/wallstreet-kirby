@@ -1,0 +1,28 @@
+title:
+  de: Getränke
+  en: Drinks
+
+fields:
+
+  title:
+    label:
+      de: Seiten-Titel
+      en: Page title
+    type:  text
+
+  main_image:
+    label:
+      de: Haupt-Bild Getränke
+      en: Main image Drinks
+    type: image
+
+pages:
+  template: drinks_chapter
+
+options:
+  preview: true
+  status: true
+  template: false
+  delete: false
+
+icon: beer
