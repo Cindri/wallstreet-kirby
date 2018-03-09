@@ -5,6 +5,11 @@ fields:
   title:
     label: Seiten-Titel
     type:  text
+
+  main_image:
+    label: Banner-Bild
+    type: image
+
   seasonspecials:
     label: Season Specials
     type: structure
@@ -31,4 +36,3 @@ fields:
 
 icon: star
 pages: false
-files: false
