@@ -2,6 +2,7 @@
 
 <?php
 /** @var \Kirby\Panel\Models\Site $site */
+/** @var \Kirby\Panel\Models\Page $page */
 /** @var \Kirby\Panel\Models\Page $mainPage */
 /** @var \Kirby\Panel\Models\Page[] $subPages */
 ?>
@@ -34,6 +35,22 @@
                         <?php endif ?>
                     </li>
                 <?php endforeach ?>
+
+                <li>
+                    <a href="#"><i class="fa fa-language"></i> <?= l::get('languages') ?></a>
+                    <div class="dropdown">
+                        <ul class="sub-menu">
+                            <?php foreach($site->languages() as $language): ?>
+                                <li<?php e($site->language() == $language, ' class="active"') ?>>
+                                    <a href="<?= $page->url($language->code()) ?>">
+                                        <img src="<?= $kirby->urls()->assets() ?>/flags/flagge_<?= $language->code() ?>.gif" width="20" height="13">
+                                        <?= html($language->name()) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                    </div>
+                </li>
         </div>
 
         <!--/.navbar-collapse -->

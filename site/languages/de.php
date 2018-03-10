@@ -21,3 +21,5 @@
 l::set('opening_hours', 'Öffnungszeiten');
 
 l::set('all', 'Alle');
+
+l::set('languages', 'Sprachen');

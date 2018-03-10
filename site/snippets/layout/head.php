@@ -18,6 +18,8 @@
     <?= css('assets/css/color/default.css') ?>
     <?= css('assets/css/custom.css') ?>
 
+    <?= css('assets/flags/flags.min.css') ?>
+
 
     <?= js('assets/js/vendor/jquery-1.11.2.min.js') ?>
     <?= js('assets/js/vendor/imagesloaded.pkgd.min.js') ?>
