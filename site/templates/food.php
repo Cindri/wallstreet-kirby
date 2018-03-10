@@ -22,7 +22,7 @@
     <div class="main-content" id="main-content">
 
         <?php
-            print snippet('pages/food');
+            print snippet('pages/menu');
         ?>
 
     </div>
