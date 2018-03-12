@@ -2,13 +2,17 @@ title: Powerlunch
 
 fields:
   title:
-    label:
-      en: Site title
-      de: Seiten-Titel
+    label: Seiten-Titel
     type:  text
+  main_image:
+    label: Banner-Bild
+    type: image
 
-  powerlunch:
-    label:
-      en: Powerlunch
-      de: Powerlunch
-    type:  textarea
+pages:
+  template: powerlunch_week
+
+icon: cutlery
+
+options:
+  template: false
+  status: false

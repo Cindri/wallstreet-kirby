@@ -1,3 +1,22 @@
+.page-header figure {
+    overflow: hidden;
+    max-height: 400px;
+}
+
+.page-header figure img {
+    width: 100% !important;
+    height: auto; !important;
+}
+
+#banner .nivoSlider {
+    max-height: 800px;
+    overflow:hidden;
+}
+
+#banner .nivoSlider .nivo-caption-content, #banner .nivoSlider .nivo-caption-content .title {
+    color: black;
+}
+
 .section.section-galleries {
     background-color: #efe6da;
 }
@@ -31,7 +50,36 @@ li > .dropdown {
     padding: 15px 0;
 }
 
+.menu-inner.season-specials aside {
+    font-size: 18pt;
+}
+
+.menu-inner.season-specials aside .menu-title {
+    font-size:22pt;
+}
+
+.menu-inner.season-specials aside .menu-price {
+    font-size:22pt;
+}
+
 .button.single-gallery-navigation-link {
+    color: black;
+    border-color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0 25px;
+    line-height: 32px;
+    border: 2px solid;
+    border-top-color: currentcolor;
+    border-right-color: currentcolor;
+    border-bottom-color: currentcolor;
+    border-left-color: currentcolor;
+    background-color: transparent;
+    margin: 0 3px;
+}
+
+.button.header-link {
     color: black;
     border-color: black;
     font-size: 16px;

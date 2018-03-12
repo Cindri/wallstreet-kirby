@@ -37,7 +37,7 @@
                 <?php endforeach ?>
 
                 <li>
-                    <a href="#"><i class="fa fa-language"></i> <?= l::get('languages') ?></a>
+                    <a href="#"><?= l::get('languages') ?></a>
                     <div class="dropdown">
                         <ul class="sub-menu">
                             <?php foreach($site->languages() as $language): ?>

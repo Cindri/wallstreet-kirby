@@ -1,4 +1,4 @@
-title: Season Specials
+title: Season Specials - Hauptseite
 
 fields:
 
@@ -10,29 +10,10 @@ fields:
     label: Banner-Bild
     type: image
 
-  seasonspecials:
-    label: Season Specials
-    type: structure
-    style: table
-    entry: >
-      {{name}}: {{price}}
-    default:
-      -
-        name: Platzhalter
-        description: Nur ein Platzhalter
-        price: 0.00
-    fields:
-      name:
-        label: Name der Speise
-        type: text
-      description:
-        label: Beschreibung
-        type: textarea
-        buttons: false
-      price:
-        label: Preis
-        type: number
-        step: .01
+  background_image:
+    label: Hintergrundbild auf Startseite
+    type: image
 
 icon: star
-pages: false
+pages:
+  template: seasonspecial

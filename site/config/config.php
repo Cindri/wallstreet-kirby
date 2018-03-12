@@ -37,22 +37,22 @@ c::set('languages', [
     [
         'code'    => 'de',
         'name'    => 'Deutsch',
-        'default' => true,
         'locale'  => 'de_DE',
         'url'     => '/',
+        'default' => true
     ],
     [
         'code'    => 'en',
         'name'    => 'English',
         'locale'  => 'en_US',
-        'url'     => '/en',
+        'url'     => '/en'
     ]
 ]);
 
 // Route-Konfigurationen (für Galerien)
 $site = site();
 /** @var Page $galleryMainPage */
-$galleryMainPage = $site->pages()->find('galerien');
+$galleryMainPage = $site->find('galerien');
 
 $routes = [];
 
@@ -61,7 +61,12 @@ foreach ($site->languages() as $language) {
     // Normale Route
     $pattern = $galleryMainPage->urlKey($language->code()) . '/(:any)';
     $action = function($gallery) use ($galleryMainPage, $language) {
-        $l10nPage = $galleryMainPage->children()->find($gallery);
+        $l10nGalleryPageName = $galleryMainPage->urlKey($language->code());
+        foreach ($galleryMainPage->children() as $galleryPage) {
+            if ($galleryPage->uri($language->code()) == $l10nGalleryPageName . '/' . $gallery) {
+                $l10nPage = $galleryPage;
+            }
+        }
         $data = [
             'selectedGallery' => $gallery,
             'ajax' => false
@@ -98,3 +103,5 @@ foreach ($site->languages() as $language) {
 }
 
 c::set('routes', $routes);
+
+c::set('panel.install', true);

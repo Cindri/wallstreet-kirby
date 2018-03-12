@@ -1,0 +1,55 @@
+title: Season Specials - Speisen
+
+fields:
+
+  start_date:
+    label: Start-Datum
+    type: date
+    format: DD.MM.YYYY
+    translate: false
+    required: true
+    width: 1/2
+
+  end_date:
+    label: End-Datum
+    type: date
+    format: DD.MM.YYYY
+    translate: false
+    required: true
+    width: 1/2
+
+  seasonspecials:
+    label: Season Specials
+    type: structure
+    style: table
+    entry: >
+      {{name}}: {{price}}
+    default:
+      -
+        name:
+        description:
+        price:
+    fields:
+      name:
+        label: Name der Speise
+        type: text
+      description:
+        label: Beschreibung
+        type: textarea
+        buttons: false
+      description_additional:
+        label: Übersetzung oder zusätzliche Angaben
+        type: textarea
+        buttons: false
+      price:
+        label: Preis
+        type: number
+        step: .1
+        translate: false
+
+icon: star
+pages: false
+files: false
+options:
+  status: false
+  template: false

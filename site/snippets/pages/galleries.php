@@ -28,7 +28,6 @@ $galleryList = $galleryMainPage->children();
                 <div class="col-sm-6 col-xs-6 gallery-item <?= $gallery->uid() ?>">
                     <div class="inner">
                         <?php if ($image): ?>
-                            <h3><?= $gallery->title() ?></h3>
                             <figure>
                                 <img src="<?= $image->url() ?>">
                                 <figcaption>
@@ -40,6 +39,7 @@ $galleryList = $galleryMainPage->children();
                                 </figcaption>
                             </figure>
                         <?php endif ?>
+                        <h4 class="title"><?= $gallery->title() ?></h4>
                     </div>
                 </div>
             <?php
