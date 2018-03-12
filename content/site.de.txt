@@ -7,3 +7,10 @@ Description: Dies ist Kirby's Sprachen-Kit.
 ----
 
 Copyright: © 2009–(date: Year) (link: http://getkirby.com text: Das Kirby-Team)
+
+----
+
+Opening-hours: 
+
+**Mo - Fr**: 09:00 - 01:00
+**Sa, So**: 10:00 - 02:00

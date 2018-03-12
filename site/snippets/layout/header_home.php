@@ -1,4 +1,3 @@
-
 <!-- Header -->
 <header id="header" class="header">
     <div class="header-inner">
@@ -38,45 +37,35 @@
     <div id="banner">
         <div class="slider-wrapper">
             <div class="nivoSlider">
-                <img src="assets/images/home/slider/slider-1.jpg" alt=""
-                     title="#nivoCaption-1" /> <img src="assets/images/home/slider/slider-2.jpg"
-                                                    alt="" title="#nivoCaption-2" /> <img
-                    src="assets/images/home/slider/slider-3.jpg" alt="" title="" />
+                <?php
+                $home = $site->find('home');
+                $sliderImages = $home->images();
+                $i = 1;
+                foreach ($sliderImages as $image):
+                    ?>
+                    <img src="<?= $image->url() ?>" alt="" title="#nivoCaption-<?= $i ?>"/>
+                    <?php
+                    $i++;
+                endforeach ?>
             </div>
             <div id="nivoCaption-1" class="nivo-html-caption">
-                <div class="nivo-caption-img-1 animated animation-delay-50"
-                     data-animate="fadeInUp">
-                    <img alt="" src="assets/images/home/slider/img-1.png">
-                </div>
-                <div class="nivo-caption-img-2 animated" data-animate="fadeInUp">
-                    <img alt="" src="assets/images/home/slider/img-2.png">
-                </div>
                 <div class="nivo-caption-content">
-                    <h1 class="line-title title animated animation-delay-75"
-                        data-animate="fadeInUp">
-                        Advertising based<i class="fa">&#xf111;</i>
+                    <h1 class="line-title title animated animation-delay-75" data-animate="fadeInUp">
+                        <?= l::get('welcome') ?><i class="fa">&#xf111;</i>
                     </h1>
-                    <p class="desc animated animation-delay-100"
-                       data-animate="fadeInUp">Coffee culture is a great coffee
-                        taste and it rests on the basis of responsible &amp; respectful</p>
+                    <p class="desc animated animation-delay-100" data-animate="fadeInUp">
+                        <?= l::get('welcome_text') ?>
+                    </p>
                 </div>
             </div>
             <div id="nivoCaption-2" class="nivo-html-caption">
-                <div class="nivo-caption-img-1 animated" data-animate="fadeInUp">
-                    <img alt="" src="assets/images/home/slider/img-3.png">
-                </div>
-                <div class="nivo-caption-img-2 animated animation-delay-50"
-                     data-animate="fadeInUp">
-                    <img alt="" src="assets/images/home/slider/img-4.png">
-                </div>
                 <div class="nivo-caption-content">
-                    <h1 class="line-title title animated animation-delay-75"
-                        data-animate="fadeInUp">
+                    <h1 class="line-title title animated animation-delay-75" data-animate="fadeInUp">
                         Pack a big punch<i class="fa">&#xf111;</i>
                     </h1>
-                    <p class="desc animated animation-delay-100"
-                       data-animate="fadeInUp">Grown traditionally, harvested
-                        naturally and roasted lovingly, they're the star of every cup</p>
+                    <p class="desc animated animation-delay-100" data-animate="fadeInUp">
+                        Grown traditionally, harvested naturally and roasted lovingly, they're the star of every cup
+                    </p>
                 </div>
             </div>
         </div>
