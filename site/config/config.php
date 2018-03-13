@@ -49,14 +49,19 @@ c::set('languages', [
     ]
 ]);
 
-// Route-Konfigurationen (für Galerien)
-$site = site();
+$languages = function ($page) {
+    return site()->languages();
+};
+
+
 /** @var Page $galleryMainPage */
-$galleryMainPage = $site->find('galerien');
+$galleryMainPage = function ($page) {
+    return site()->find('galerien');
+};
 
 $routes = [];
 
-foreach ($site->languages() as $language) {
+foreach ($languages as $language) {
 
     // Normale Route
     $pattern = $galleryMainPage->urlKey($language->code()) . '/(:any)';
@@ -103,5 +108,3 @@ foreach ($site->languages() as $language) {
 }
 
 c::set('routes', $routes);
-
-c::set('panel.install', true);

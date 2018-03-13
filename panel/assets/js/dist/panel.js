@@ -6415,8 +6415,8 @@ var Content = function() {
 
     mainbar: 0,
     sidebar: 0,
-    
-    save : function() {      
+
+    save : function() {
       scroll.mainbar = $('.mainbar').scrollTop();
       scroll.sidebar = $('.sidebar').scrollTop();
     },
@@ -6461,7 +6461,7 @@ var Content = function() {
       redirect: function(response) {
 
         if($.type(response) == 'object' && response.url) {
-          open(response.url);                        
+          open(response.url);
         } else {
           replace(response.content);
         }
@@ -6476,7 +6476,7 @@ var Content = function() {
 
   // clean all registered events and remove generated elements
   var off = function() {
-    
+
     // stop all delays
     app.delay.stop();
 
@@ -6491,36 +6491,36 @@ var Content = function() {
 
   };
 
-  var open = function(url, state) {
+  var open = function(url, complete) {
 
     app.load(url, 'content', function(response) {
       // handle redirects
       if(response.url) {
-        open(response.url);
+        open(response.url, complete);
       } else {
-        replace(response.content, url);
+        replace(response.content, url, complete);
       }
     });
 
   };
 
-  var replace = function(content, url) {
+  var replace = function(content, url, complete) {
 
     // close all context menus
     $(document).trigger('click.contextmenu');
 
     // close all modals
-    app.modal.close();      
+    app.modal.close();
 
-    root.html(content);    
+    root.html(content);
 
     // change the history
     if(url) {
-      if(window.location.href != url) {                
-        focus.forget();            
+      if(window.location.href != url) {
+        focus.forget();
         try {
           path = url.replace(window.location.origin, '');
-          window.history.pushState({path: path}, document.title, path);                    
+          window.history.pushState({path: path}, document.title, path);
         } catch(e) {
           window.location.href = url;
         }
@@ -6531,13 +6531,20 @@ var Content = function() {
     on();
 
     // restore the previous scroll position
-    scroll.restore();          
+    scroll.restore();
+
+    if ($.type(complete) === 'function') {
+      complete();
+    }
 
   };
 
   var reload = function() {
     scroll.save();
-    open(document.location);
+    $('body').addClass('loading');
+    open(document.location, function () {
+      $('body').removeClass('loading');
+    });
   };
 
   var shortcuts = function() {
@@ -6550,7 +6557,7 @@ var Content = function() {
 
   var setup = function() {
 
-    $(window).on('popstate', function(e) {      
+    $(window).on('popstate', function(e) {
       open(document.location);
     });
 
@@ -6569,11 +6576,12 @@ var Content = function() {
     shortcuts: shortcuts,
     form: form,
     focus: focus,
-    setup: setup, 
+    setup: setup,
     scroll: scroll
   };
 
 };
+
 var Delay = function() {
 
   var delays = {};
@@ -6696,6 +6704,9 @@ var Form = function(form, params) {
 
   var form = $(form);
 
+  // remove all event handlers from the form
+  form.off();
+
   var defaults = {
     focus    : false,
     returnTo : false,
@@ -6708,7 +6719,7 @@ var Form = function(form, params) {
 
   form.find('[data-focus=true]').fakefocus('input-is-focused');
 
-  // setup all field plugins  
+  // setup all field plugins
   form.find('[data-field]').each(function() {
     var el  = $(this);
     var key = el.data('field');
@@ -6717,7 +6728,7 @@ var Form = function(form, params) {
 
   // keep changes on updates to avoid data loss
   if(form.data('keep')) {
-    
+
     form.on('keep', function() {
       $.post(form.data('keep'), form.serializeObject())
     });
@@ -6728,9 +6739,9 @@ var Form = function(form, params) {
 
   }
 
-  // focus the right field  
+  // focus the right field
   if(options.focus) {
-    form.find('[autofocus]').focus();    
+    form.find('[autofocus]').focus();
   }
 
   // don't setup a form submission action
@@ -6742,16 +6753,23 @@ var Form = function(form, params) {
   form.find('.btn-addit').on('click', function() {
     // change the form action
     form.attr('action', $(this).data('action'));
-  }); 
+  });
 
   // hook up the form submission
   form.on('submit', function(e) {
 
+    if (form.hasClass('loading')) {
+      return false;
+    }
+
+    form.addClass('loading');
+
     // auto submission can be switched off via a data attribute
     // to setup your own submission action
     if(form.data('autosubmit') == false) {
-      return false;
-    } 
+      e.preventDefault();
+      return;
+    }
 
     // submission event
     options.submit(form);
@@ -6767,7 +6785,9 @@ var Form = function(form, params) {
 
       // hide the loading indicator
       if(app) app.isLoading(false);
-    
+
+      form.removeClass('loading');
+
       // handle redirection and replacement of data
       options.redirect(response);
 
@@ -6775,6 +6795,8 @@ var Form = function(form, params) {
 
       // hide the loading indicator
       if(app) app.isLoading(false);
+
+      form.removeClass('loading');
 
       if(response.responseJSON && response.responseJSON.message) {
         alert(response.responseJSON.message);
@@ -6789,6 +6811,7 @@ var Form = function(form, params) {
   });
 
 };
+
 (function($) {
 
   $.fn.message = function() {
@@ -6824,7 +6847,7 @@ var Modal = function(app) {
     return $('.modal').length > 0;
   };
 
-  // initialize all modal events as soon 
+  // initialize all modal events as soon
   // as the modal content is loaded
   var on = function() {
 
@@ -6843,7 +6866,7 @@ var Modal = function(app) {
     content.find('.btn-cancel').on('click', function() {
       if($('.modal').length) {
         close();
-        return false;        
+        return false;
       }
     });
 
@@ -6861,27 +6884,34 @@ var Modal = function(app) {
     // setup the form
     var form = content.find('.form');
 
-    // switch to native form 
+    // switch to native form
     // submission on modal pages
     if(!isOverlay()) {
-      form.data('autosubmit', 'native');      
+      form.data('autosubmit', 'native');
     }
 
     Form(form, {
       focus: true,
       redirect: function(response) {
+
         if($.type(response) == 'object') {
           if(response.url) {
-            app.content.open(response.url);                        
+            $('.modal').remove();
+            $('body').addClass('loading');
+            app.content.open(response.url, function () {
+              $('body').removeClass('loading');
+            });
             return;
           } else if(response.content) {
             replace(response.content);
             return;
-          } 
-        } 
+          }
+        }
         window.location.reload();
       }
     });
+
+    root.trigger('setup');
 
   };
 
@@ -6909,7 +6939,7 @@ var Modal = function(app) {
     close();
 
     // switch off content events
-    // to avoid conflicts    
+    // to avoid conflicts
     app.content.off();
 
     // load the modal view
@@ -6921,7 +6951,7 @@ var Modal = function(app) {
       // add the modal to the body
       $('body').append(root);
 
-      // make sure the modal closes when 
+      // make sure the modal closes when
       // the backdrop is being clicked
       root.on('click', function() {
         close();
@@ -6964,7 +6994,7 @@ var Modal = function(app) {
 
     // switch content events back on
     app.content.on();
-    
+
   };
 
   // return the modal form element
@@ -6975,7 +7005,7 @@ var Modal = function(app) {
   var setup = function() {
 
     // init an existing modal on load
-    if(app.hasModal()) {      
+    if(app.hasModal()) {
       on();
     }
 
@@ -6983,7 +7013,7 @@ var Modal = function(app) {
 
   return {
     root: root,
-    open: open,  
+    open: open,
     close: close,
     replace: replace,
     form: form,
@@ -6991,6 +7021,7 @@ var Modal = function(app) {
   };
 
 };
+
 var Search = function() {
 
   $(document).on('click', function() {
@@ -7248,9 +7279,9 @@ var Search = function() {
     });
 
     $('[data-upload]').on('click', function() {
-      form.find('input[type=file]').trigger('click').on('change', function() {
+      form.find('input[type=file]').on('change', function() {
         upload(this.files);
-      });
+      }).trigger('click');
       return false;
     });
 
