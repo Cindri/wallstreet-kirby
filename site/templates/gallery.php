@@ -3,6 +3,9 @@
 /** @var \Kirby\Panel\Models\Page $page */
 $galleryPage = $page;
 
+// Workaround, falls Ajax-Route nicht funktioniert
+isset($ajax) ? $ajax = true : $ajax = false;
+
 // HTML-Rahmen nur einbinden, wenn nicht per AJAX-Request angefragt
 if (!$ajax):
     $galleryMainPage = $site->find('galerien');
