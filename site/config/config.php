@@ -15,6 +15,8 @@ for more information: http://getkirby.com/license
 
 */
 
+require_once('site/controllers/Newsletter/NewsletterController.php');
+
 c::set('license', 'put your license key here');
 
 c::set('debug', true);
@@ -49,62 +51,21 @@ c::set('languages', [
     ]
 ]);
 
-$languages = function ($page) {
-    return site()->languages();
-};
-
-
-/** @var Page $galleryMainPage */
-$galleryMainPage = function ($page) {
-    return site()->find('galerien');
-};
-
-$routes = [];
-
-foreach ($languages as $language) {
-
-    // Normale Route
-    $pattern = $galleryMainPage->urlKey($language->code()) . '/(:any)';
-    $action = function($gallery) use ($galleryMainPage, $language) {
-        $l10nGalleryPageName = $galleryMainPage->urlKey($language->code());
-        foreach ($galleryMainPage->children() as $galleryPage) {
-            if ($galleryPage->uri($language->code()) == $l10nGalleryPageName . '/' . $gallery) {
-                $l10nPage = $galleryPage;
+$routes = [
+    [
+        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)/(:any?)',
+        'action' => function($lang, $action, $data = null) {
+            // Action
+            $action = strtolower(trim($action));
+            // Controller laden
+            $controller = new NewsletterController($lang, $data);
+            if (method_exists($controller, $action)) {
+                return $controller->{$action}();
             }
-        }
-        $data = [
-            'selectedGallery' => $gallery,
-            'ajax' => false
-        ];
-        site()->visit($l10nPage, $language->code());
-        return [$l10nPage, $data];
-    };
-
-    $newRoute['pattern'] = $pattern;
-    $newRoute['action'] = $action;
-    if (!$language->default()) {
-        $newRoute['pattern'] = $language->code() . '/' . $pattern;
-    }
-    $routes[] = $newRoute;
-
-    // AJAX Route
-    $pattern = $pattern . '/ajax';
-    $ajaxAction = function($gallery) use ($galleryMainPage, $language) {
-        $l10nGalleryPageName = $galleryMainPage->urlKey($language->code());
-        $l10nPage = $l10nGalleryPageName . '/' . $gallery;
-        $data = [
-            'ajax' => true
-        ];
-        $page = site()->visit($l10nPage, $language->code());
-        return [$page, $data];
-    };
-    $newRoute['pattern'] = $pattern;
-    $newRoute['action'] = $ajaxAction;
-    if (!$language->default()) {
-        $newRoute['pattern'] = $language->code() . '/' . $pattern;
-    }
-    $routes[] = $newRoute;
-
-}
+            return site()->visit('error', $lang);
+        },
+        'method' => 'GET|POST'
+    ]
+];
 
 c::set('routes', $routes);
