@@ -69,3 +69,4 @@ $routes = [
 ];
 
 c::set('routes', $routes);
+include('routes.php');
