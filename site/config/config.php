@@ -15,8 +15,6 @@ for more information: http://getkirby.com/license
 
 */
 
-require_once('site/controllers/Newsletter/NewsletterController.php');
-
 c::set('license', 'put your license key here');
 
 c::set('debug', true);
@@ -51,22 +49,4 @@ c::set('languages', [
     ]
 ]);
 
-$routes = [
-    [
-        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)/(:any?)',
-        'action' => function($lang, $action, $data = null) {
-            // Action
-            $action = strtolower(trim($action));
-            // Controller laden
-            $controller = new NewsletterController($lang, $data);
-            if (method_exists($controller, $action)) {
-                return $controller->{$action}();
-            }
-            return site()->visit('error', $lang);
-        },
-        'method' => 'GET|POST'
-    ]
-];
-
-c::set('routes', $routes);
 include('routes.php');

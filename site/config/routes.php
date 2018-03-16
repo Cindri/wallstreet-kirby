@@ -1,10 +1,11 @@
 <?php
 
-$pattern = '(?:(en)/)?(:any)/(:any)/ajax';
+require_once('site/controllers/Newsletter/NewsletterController.php');
 
 c::set('routes', [
+    // Ajax-Route für Galerien
     [
-        'pattern' => $pattern,
+        'pattern' => '(?:(en)/)?(:any)/(:any)/ajax',
         'action' => function($lang, $galleriesUid, $galleryUid) {
             if (empty($lang)) {
                 $lang = 'de';
@@ -15,5 +16,20 @@ c::set('routes', [
             $page = site()->visit($galleriesUid . '/' . $galleryUid, $lang);
             return [$page, $data];
         }
+    ],
+    // Newsletter-Routes
+    [
+        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)/(:any?)',
+        'action' => function($lang, $action, $data = null) {
+            // Action
+            $action = strtolower(trim($action));
+            // Controller laden
+            $controller = new NewsletterController($lang, $data);
+            if (method_exists($controller, $action)) {
+                return $controller->{$action}();
+            }
+            return site()->visit('error', $lang);
+        },
+        'method' => 'GET|POST'
     ]
 ]);
