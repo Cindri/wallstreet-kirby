@@ -38,16 +38,22 @@ class PowerlunchService
 
     /**
      * Gibt ein Array von Speisen der aktuellen Woche zurück (mit Datum)
-     * @param Page $week Die Woche (Unterseite), aus der die Speisen ermittelt werden sollen
+     * @param Page|null $week Die Woche (Unterseite), aus der die Speisen ermittelt werden sollen
      * @return array Ein "Tages-Block", in dem unter 'date' das Datum des Tages und unter 'meals' die aktuellen Speisen gespeichert sind
      */
-    public function getMealsOfCurrentWeek(Page $week) {
+    public function getMealsOfCurrentWeek($week) {
+
+        if (!$week instanceof Page) {
+            return [];
+        }
+
         $currentWeekStartDate = new DateTime($week->start_date());
         $currentWeekEndDate = new DateTime($week->end_date());
 
         $dayCounter = $currentWeekStartDate;
         $mealsOfCurrentWeek = array();
         $usedDays = array();
+        
         while ($dayCounter <= $currentWeekEndDate) {
 
             $dayName = $dayCounter->format('l');
@@ -69,7 +75,7 @@ class PowerlunchService
             $dayField = $week->{$dayFieldName}();
             if ($dayField->exists()) {
                 $dayMeals = $week->{$dayFieldName}()->toStructure();
-                $mealsOfCurrentWeek[$dayName]['date'] = $dayCounter;
+                $mealsOfCurrentWeek[$dayName]['date'] = clone $dayCounter;
                 $mealsOfCurrentWeek[$dayName]['meals'] = $dayMeals;
             }
 
