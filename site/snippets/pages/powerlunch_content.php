@@ -1,17 +1,13 @@
 <?php
 
-/** @var \Kirby\Panel\Models\Page $currentPowerlunchWeek */
-/** @var \Kirby\Panel\Models\Page $powerlunchPage */
+require_once(__ROOT__ . '/controllers/Newsletter/Services/PowerlunchService.php');
 
-$actualDate = new \DateTime();
-$currentPowerlunchWeek = null;
-foreach ($powerlunchPage->children() as $powerlunchWeek) {
-    $startDate = new \DateTime($powerlunchWeek->start_date());
-    $endDate = new \DateTime($powerlunchWeek->end_date());
-    if ($startDate <= $actualDate && $endDate > $actualDate) {
-        $currentPowerlunchWeek = $powerlunchWeek;
-    }
-}
+$powerlunchService = new PowerlunchService($site->language()->code());
+
+/** @var \Kirby\Panel\Models\Page $currentPowerlunchWeek */
+$currentPowerlunchWeek = $powerlunchService->getCurrentWeek();
+
+$currentMealDays = $powerlunchService->getMealsOfCurrentWeek($currentPowerlunchWeek);
 
 if (!empty($currentPowerlunchWeek)):
 ?>
