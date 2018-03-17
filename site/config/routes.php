@@ -1,6 +1,5 @@
 <?php
-
-require_once('site/controllers/Newsletter/NewsletterController.php');
+require_once __ROOT__ . '/controllers/Newsletter/NewsletterController.php';
 
 c::set('routes', [
     // Ajax-Route für Galerien
