@@ -20,8 +20,10 @@ c::set('routes', [
     [
         'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)/(:any?)',
         'action' => function($lang, $action, $data = null) {
-            // Action
-            $action = strtolower(trim($action));
+            if (empty($lang)) {
+                $lang = 'de';
+            }
+            $action = trim($action) . 'Action';
             // Controller laden
             $controller = new NewsletterController($lang, $data);
             if (method_exists($controller, $action)) {
