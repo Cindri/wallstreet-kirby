@@ -1,7 +1,7 @@
 <?php
 
-require('RecipientsService.php');
-require('PowerlunchService.php');
+require('Services/RecipientsService.php');
+require('Services/PowerlunchService.php');
 
 class NewsletterController
 {
