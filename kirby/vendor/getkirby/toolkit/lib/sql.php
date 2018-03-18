@@ -105,8 +105,8 @@ class Sql {
 sql::registerMethod('generateBindingName', function($sql, $label) {
   // make sure that the binding name is valid to prevent injections
   if(!preg_match('/^[a-z0-9]+$/', $label)) $label = 'invalid';
-  
-  return ':' . $label . '_' . uniqid();
+
+  return ':' . $label . '_' . uniqid(rand(0, 9999));
 });
 
 /**
@@ -346,7 +346,6 @@ sql::registerMethod('values', function($sql, $table, $values, $separator = ', ',
   if(!is_array($values)) return $values;
   
   if($set) {
-
     $output   = array();
     $bindings = array();
 
@@ -375,7 +374,6 @@ sql::registerMethod('values', function($sql, $table, $values, $separator = ', ',
     return implode($separator, $output);
 
   } else {
-
     $fields   = array();
     $output   = array();
     $bindings = array();
@@ -396,7 +394,7 @@ sql::registerMethod('values', function($sql, $table, $values, $separator = ', ',
       } elseif(is_array($value)) {
         $value = json_encode($value);
       }
-      
+
       $valueBinding = $sql->generateBindingName('value');
       $bindings[$valueBinding] = $value;
       
