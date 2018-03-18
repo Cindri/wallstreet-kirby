@@ -24,28 +24,72 @@ class NewsletterController
         $this->powerlunchService = new PowerlunchService($lang);
     }
 
+    /**
+     * Route zum Hinzufügen von Empfängern
+     * @return object
+     */
     public function addAction()
     {
-        $page = site()->visit('galerien', $this->lang);
-        return [$page, $this->data];
+        $email = r::postData('email', '');
+        $fax = r::postData('fax', '');
+        $name = r::postData('name', '');
+        $street = r::postData('street', '');
+        $city = r::postData('city', '');
+        $phone = r::postData('phone', '');
+
+        if ($insertId = $this->recipientsService->addNewRecipient($email, $fax, $name, $street, $city, $phone)) {
+            return \Response::success('Benutzer hinzugefügt', $insertId);
+        } else {
+            return \Response::error('Benutzer konnte nicht hinzugefügt werden');
+        }
     }
 
+    /**
+     * Route zum Bestätigen von Empfängern
+     * @return object
+     */
     public function confirmAction()
     {
-        return \Response::success('Confirm erfolgreich', $this->data);
+        $code = get('code', '');
+        $type = get('art', 'email');
+        if (!empty($code)) {
+            if ($this->recipientsService->confirmRecipient($code, $type)) {
+                return \Response::success('Confirm erfolgreich');
+            }
+        }
+        return \Response::error('Fehler beim Bestätigen');
     }
 
+    /**
+     * Route zum Auflisten von Empfängern
+     * @return object
+     */
     public function listAction()
     {
         $list = $this->recipientsService->getList(20);
         return \Response::success($list, $this->data);
     }
 
+    /**
+     * Route zum Austragen von Empfängern
+     * @return object
+     */
     public function signoutAction()
     {
-        return \Response::success('Sign out');
+        $code = get('code', '');
+        $type = get('art', 'email');
+        if (!empty($code)) {
+            if ($this->recipientsService->deleteRecipient($code, $type)) {
+                return \Response::success('User erfolgreich ausgetragen');
+            }
+        }
+        return \Response::error('Fehler beim Austragen aus dem Newsletter');
     }
 
+    /**
+     * Route, die das aktuelle Powerlunch im Format des alten PDF-Generierungs-Codes bereitstellt
+     * @return object
+     */
     public function apiPowerlunchListAction()
     {
         /** @var \Kirby\Panel\Models\Page $week */
@@ -69,10 +113,5 @@ class NewsletterController
 
         return Response::json($apiData);
     }
-
-    // Idee: Kirby stellt API-ähnliche Routes bereit, auf der das aktuelle Mittagessen als JSON zurückgegeben wird (oder die Season Specials, je nach Wunsch)
-    // Der Start erfolgt nach wie vor über die alten Dateien auf dem Panten-Server. Einziger Unterschied: Statt die Datenbank nach den Speisen-Daten zu fragen, müssen die Skripte die Kirby-API
-    // per HTTP-Request um die Speisen-Daten fragen und in identische Struktur überführen.
-
 
 }
