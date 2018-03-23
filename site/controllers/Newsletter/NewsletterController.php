@@ -37,10 +37,14 @@ class NewsletterController
         $city = r::postData('city', '');
         $phone = r::postData('phone', '');
 
+        if (empty($email) && empty($fax) || !empty($fax) && empty($phone)) {
+            return \Response::error(l::get('error_newsletter_requirements'));
+        }
+
         if ($insertId = $this->recipientsService->addNewRecipient($email, $fax, $name, $street, $city, $phone)) {
-            return \Response::success('Benutzer hinzugefügt', $insertId);
+            return \Response::success(l::get('newsletter_registration_success'), $insertId);
         } else {
-            return \Response::error('Benutzer konnte nicht hinzugefügt werden');
+            return \Response::error(l::get('newsletter_registration_fail'));
         }
     }
 
