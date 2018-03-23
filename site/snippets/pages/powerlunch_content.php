@@ -12,7 +12,7 @@ $currentMealDays = $powerlunchService->getMealsOfCurrentWeek($currentPowerlunchW
 if (!empty($currentPowerlunchWeek)):
     ?>
 
-    <section id="powerlunch" class="section">
+    <section id="powerlunch">
         <div id="menus" class="menus">
             <div class="container">
                 <?php if ($page->uid() == 'home'): ?>

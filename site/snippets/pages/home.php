@@ -30,5 +30,10 @@ snippet('pages/seasonspecials_content', ['seasonSpecialsPage' => $powerlunchPage
 
 <?php
 $foodPage = $site->find('speisen');
-snippet('pages/menu', ['page' => $foodPage]);
+snippet('pages/menu', ['page' => $foodPage         ]);
+?>
+
+<?php
+$drinkPage = $site->find('getraenke');
+snippet('pages/menu', ['page' => $drinkPage]);
 ?>

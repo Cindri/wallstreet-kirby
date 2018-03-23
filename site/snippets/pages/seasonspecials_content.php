@@ -12,12 +12,14 @@ foreach ($seasonSpecialsPage->children() as $seasonSpecial) {
 if (!empty($currentSeasonSpecial)):
 ?>
 
-<section id="seasonspecials" class="section" <?php if ($page->uid() == 'home'): ?> style="background-image:url('<?= $seasonSpecialsPage->background_image()->toFile()->url() ?>'); background-size:cover; background-repeat:no-repeat;"<?php endif ?>>
-    <div id="menus" class="menus">
+<section id="seasonspecials" <?php if ($page->uid() == 'home'): ?> style="background-image:url('<?= $seasonSpecialsPage->background_image()->toFile()->url() ?>'); background-size:cover; background-repeat:no-repeat;"<?php endif ?>>
+    <div id="menus" class="menus <?php if ($page->uid() == 'home'): ?>home<?php endif ?>">
         <div class="container">
-            <?php if ($page->uid() == 'home'): ?>
-                <h1 class="title title-center"><span class="line-title"><?= $seasonSpecialsPage->title() ?><i class="fa"></i></span></h1>
-            <?php endif ?>
+            <div class="page-header">
+                <?php if ($page->uid() == 'home'): ?>
+                    <h1 class="title title-center"><span class="line-title <?php if ($page->uid() == 'home'): ?>white<?php endif ?>"><?= $seasonSpecialsPage->title() ?><i class="fa"></i></span></h1>
+                <?php endif ?>
+            </div>
             <div class="menus-inner">
                 <?php
                 foreach ($currentSeasonSpecial->seasonspecials()->toStructure() as $seasonSpecial):
@@ -29,7 +31,7 @@ if (!empty($currentSeasonSpecial)):
                                     <aside class="clearfix animated animation-delay-25 fadeInRight"
                                            data-animate="fadeInRight">
                                         <div class="menu-content">
-                                            <h5 class="title menu-title">
+                                            <h5 class="title menu-title <?php if ($page->uid() == 'home'): ?>home<?php endif ?>">
                                                 <span><?= $seasonSpecial->name() ?></span>
                                                 <span class="menu-price">
                                                             <i class="fa fa-usd"></i>
