@@ -1,3 +1,13 @@
+.page-header {
+    position: static;
+}
+
+.page-header h1.title {
+    position: static;
+    margin-top: 50px;
+    color: black;
+}
+
 .page-header figure {
     overflow: hidden;
     max-height: 400px;
@@ -17,6 +27,24 @@
     color: black;
 }
 
+#banner a.banner-link {
+    width: 100%;
+    font-size:26pt;
+    line-height: 28pt;
+    font-weight: bold;
+    padding: 50px;
+    display: block !important;
+    color: #EEEEEE;
+    background-color: #e27900;
+    -webkit-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+    cursor: pointer;
+}
+#banner a.banner-link:hover {
+    color: white;
+    background-color: #f89816;
+}
+
 .section.section-galleries {
     background-color: #efe6da;
 }
@@ -28,6 +56,30 @@
 
 li > .dropdown {
     z-index: 99;
+}
+
+h1.title {
+    font-size: 52px;
+    font-weight: bold;
+}
+
+h1.title.shadow {
+    text-shadow: 2px 1px 1px white;
+}
+
+.title.title-center {
+    text-align:center;
+    margin-bottom: 30px;
+}
+
+h1 span.line-title.white {
+    color: white;
+}
+
+p.desc.banner-text {
+    text-shadow: 1px 1px 0 white;
+    font-size: 36px;
+    line-height: 40px;
 }
 
 .single-gallery {
@@ -48,6 +100,30 @@ li > .dropdown {
     text-align:center;
     margin-bottom: 35px;
     padding: 15px 0;
+}
+
+
+/* Gallery Bootstrap Fix */
+.galleries .col-xs-4 {
+    width: 32.4%;
+}
+
+.galleries .col-sm-3 {
+    width: 24.7%;
+}
+
+#seasonspecials .menus.home {
+    background-color:rgba(0, 0, 0, 0.7);
+}
+
+h5.title.menu-title.home {
+    background-color: transparent;
+    color: white;
+    border-bottom: 1px dashed white;
+}
+
+.season-specials p {
+    color: #7c7c88;
 }
 
 .menu-inner.season-specials aside {
@@ -105,7 +181,27 @@ li > .dropdown {
     padding:0;
 }
 
-.title.title-center {
-    text-align:center;
-    margin-bottom: 30px;
+#footer {
+    background-color: black;
+}
+
+.footer-info {
+    color: white;
+}
+
+.footer-info h3 {
+    color: #efe6da;
+}
+
+.footer-info a {
+    color: #e27900;
+}
+
+.footer-info a:hover {
+    text-decoration: underline;
+}
+
+.footer-info button {
+    background-color: white;
+    color: black;
 }
