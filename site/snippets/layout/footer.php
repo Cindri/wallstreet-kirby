@@ -31,9 +31,10 @@
                     <aside class="widget">
                         <h3 class="title">Newsletter</h3>
                         <div class="widget-content">
-                            <p>If you world like sign-up to the origin
-                                newsletter,please enter your email address below</p>
-                            <form method="post" action="#">
+                            <p><?= l::get('newsletter_invitation_short') ?><br/>
+                                <a href="register"><?= l::get('newsletter_link_long_registration') ?></a>
+                            </p>
+                            <form method="post" action="newsletter/add" class="registration-form registration-form-short">
                                 <p>
                                     <input type="text" value="" name="name" placeholder="Name"
                                            required="required" class="name">
@@ -43,7 +44,7 @@
                                            required="required" class="email">
                                 </p>
                                 <p>
-                                    <button class="hvr-shutter-out-horizontal">Subscribe</button>
+                                    <button class="hvr-shutter-out-horizontal js-submit-registration">Subscribe</button>
                                 </p>
                             </form>
                         </div>
@@ -70,7 +71,7 @@
     <div class="copyright">
         <div class="container">
             <p>
-                Copyright &copy; 2015 <a href="http://themeforest.net/user/mtheme_market">mTheme</a>. All Rights Reserved.
+                Copyright &copy; <?= date('Y') ?> <?= l::get('copyright_notice') ?>
             </p>
         </div>
     </div>
