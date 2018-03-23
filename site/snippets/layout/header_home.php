@@ -50,22 +50,22 @@
             </div>
             <div id="nivoCaption-1" class="nivo-html-caption">
                 <div class="nivo-caption-content">
-                    <h1 class="line-title title animated animation-delay-75" data-animate="fadeInUp">
+                    <h1 class="line-title title shadow animated animation-delay-75" data-animate="fadeInUp">
                         <?= l::get('welcome') ?><i class="fa">&#xf111;</i>
                     </h1>
-                    <p class="desc animated animation-delay-100" data-animate="fadeInUp">
+                    <p class="desc banner-text animated animation-delay-100" data-animate="fadeInUp">
                         <?= l::get('welcome_text') ?>
                     </p>
                 </div>
             </div>
             <div id="nivoCaption-2" class="nivo-html-caption">
                 <div class="nivo-caption-content">
-                    <h1 class="line-title title animated animation-delay-75" data-animate="fadeInUp">
-                        Pack a big punch<i class="fa">&#xf111;</i>
-                    </h1>
-                    <p class="desc animated animation-delay-100" data-animate="fadeInUp">
-                        Grown traditionally, harvested naturally and roasted lovingly, they're the star of every cup
-                    </p>
+
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-6"><a class="banner-link" href="<?= $site->find('speisen')->url() ?>"><?= l::get('link_food'); ?></a></div>
+                            <div class="col-sm-6 col-xs-6"><a class="banner-link" href="<?= $site->find('getraenke')->url() ?>"><?= l::get('link_drinks'); ?></a></div>
+                        </div>
+
                 </div>
             </div>
         </div>
