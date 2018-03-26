@@ -1,0 +1,14 @@
+title: Freunde-Liste
+
+fields:
+  title:
+    label: Title
+    type:  text
+
+  subline:
+    label: Unterüberschrift
+    type: text
+
+  text:
+    label: Text
+    type:  textarea

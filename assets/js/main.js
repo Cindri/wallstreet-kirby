@@ -401,70 +401,44 @@
             });
         }
 
-        // // Submit Form
-        // $("#contactform").submit(function (event) {
-        //     event.preventDefault();
-        //
-        //     var $this = $(this);
-        //
-        //     $.ajax({
-        //         type: "POST",
-        //         data: $this.serialize(),
-        //         url: $this.prop('action'),
-        //         cache: false
-        //     }).done(function (html) {
-        //         if ($this.find('.alert').length < 1) {
-        //             $this.append('<div role="alert" class="alert alert-success"><strong>' + html + '</strong></div>');
-        //             $this.find('.alert').hide().toggle(350).delay(10000).toggle(350);
-        //         } else {
-        //             $this.find('.alert').html('<strong>' + html + '</strong>').hide().toggle(350).delay(10000).toggle(350);
-        //         }
-        //     })
-        //         .fail(function () {
-        //
-        //             if ($this.find('.alert').length < 1) {
-        //                 $this.append('<div role="alert" class="alert alert-danger"><strong>Please Try Again Latter.</strong></div>');
-        //                 $this.find('.alert').hide().toggle(350).delay(10000).toggle(350);
-        //
-        //             } else {
-        //                 $this.find('.alert').html('<strong>Please Try Again Latter.</strong>').hide().toggle(350).delay(10000).toggle(350);
-        //             }
-        //
-        //         })
-        //         .always(function (html) {
-        //         });
-        //
-        //     return false;
-        // });
-
         $('.js-submit-registration').click(function (event) {
             event.preventDefault();
-
             var $form = $(this).closest('.registration-form');
+            $form.submit();
+            $(this).blur();
+        });
 
-            $.ajax({
-                type: "POST",
-                data: $form.serialize(),
-                url: $form.prop('action'),
-                cache: false
-            }).done(function (json) {
-                if ($form.find('.alert').length < 1) {
-                    $form.append('<div role="alert" class="alert alert-success"><strong>' + json.message + '</strong></div>');
-                    $form.find('.alert').hide().toggle(350).delay(10000).toggle(350);
-                } else {
-                    $form.find('.alert').html('<strong>' + json.message + '</strong>').hide().toggle(350).delay(10000).toggle(350);
-                }
-            }).fail(function () {
-                if ($form.find('.alert').length < 1) {
-                    $form.append('<div role="alert" class="alert alert-danger"><strong>' + json.message + '</strong></div>');
-                    $form.find('.alert').hide().toggle(350).delay(10000).toggle(350);
+        $('.js-registration-form').submit(function(event) {
+            event.preventDefault();
 
-                } else {
-                    $form.find('.alert').html('<strong>Please Try Again Latter.</strong>').hide().toggle(350).delay(10000).toggle(350);
-                }
-            }).always(function (html) {
-                console.log(html.message);
-            });
+            var $form = $(this);
+            if (!this.reportValidity || this.reportValidity()) {
+                $.ajax({
+                    type: "POST",
+                    data: $form.serialize(),
+                    url: $form.prop('action'),
+                    cache: false
+                }).done(function (json) {
+                    var alertClass;
+                    if (json.status === 'success') {
+                        alertClass = 'success';
+                        $form.find('.js-submit-registration').attr('disabled', true);
+                    } else {
+                        alertClass = 'danger';
+                    }
+                    if ($form.find('.alert').length < 1) {
+                        $form.append('<div role="alert" class="alert alert-' + alertClass + ' alert-dismissible"><strong>' + json.message + '</strong>' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                            '<span aria-hidden="true">&times;</span>\n' +
+                            '</button></div>');
+                        $form.find('.alert').hide().toggle(350);
+                    } else {
+                        $form.find('.alert').removeClass('alert-success').removeClass('alert-danger').addClass('alert-' + alertClass);
+                        $form.find('.alert').html('<strong>' + json.message + '</strong>').hide().toggle(350);
+                    }
+                });
+            }
+            return false;
         });
     });
 

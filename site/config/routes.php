@@ -1,4 +1,5 @@
 <?php
+require_once(__ROOT__ . '/languages/routingMessages.php');
 require_once __ROOT__ . '/controllers/Newsletter/NewsletterController.php';
 
 c::set('routes', [
@@ -18,7 +19,7 @@ c::set('routes', [
     ],
     // Newsletter-Routes
     [
-        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)/(:any?)',
+        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)',
         'action' => function($lang, $action, $data = null) {
             if (empty($lang)) {
                 $lang = 'de';

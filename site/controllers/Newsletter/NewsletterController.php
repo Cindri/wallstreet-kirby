@@ -38,13 +38,13 @@ class NewsletterController
         $phone = r::postData('phone', '');
 
         if (empty($email) && empty($fax) || !empty($fax) && empty($phone)) {
-            return \Response::error(l::get('error_newsletter_requirements'));
+            return \Response::error(ERROR_MSG[$this->lang]['error_newsletter_requirements'], 200);
         }
 
         if ($insertId = $this->recipientsService->addNewRecipient($email, $fax, $name, $street, $city, $phone)) {
-            return \Response::success(l::get('newsletter_registration_success'), $insertId);
+            return \Response::success(ERROR_MSG[$this->lang]['newsletter_registration_success'], $this->lang . $insertId);
         } else {
-            return \Response::error(l::get('newsletter_registration_fail'));
+            return \Response::error(ERROR_MSG[$this->lang]['newsletter_registration_fail'], 200);
         }
     }
 

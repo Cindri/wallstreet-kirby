@@ -1,3 +1,9 @@
+
+<?php
+/** @var \Kirby\Panel\Models\Page $friendListPage */
+$friendListPage = $site->find('freunde-liste');
+?>
+
 <footer id="footer">
     <div class="footer-info">
         <div class="container">
@@ -32,9 +38,9 @@
                         <h3 class="title">Newsletter</h3>
                         <div class="widget-content">
                             <p><?= l::get('newsletter_invitation_short') ?><br/>
-                                <a href="register"><?= l::get('newsletter_link_long_registration') ?></a>
+                                <a href="<?= $friendListPage->url() ?>"><?= l::get('newsletter_link_long_registration') ?></a>
                             </p>
-                            <form method="post" action="newsletter/add" class="registration-form registration-form-short">
+                            <form method="post" action="<?= $site->url($site->language()->code()) ?>/newsletter/add" data-action="newsletter/add" class="registration-form registration-form-short js-registration-form">
                                 <p>
                                     <input type="text" value="" name="name" placeholder="Name"
                                            required="required" class="name">
