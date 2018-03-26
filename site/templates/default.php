@@ -24,7 +24,11 @@
         <?php
         /** @var \Kirby\Panel\Models\Page $page */
             $pageTemplate = $page->intendedTemplate();
-            print snippet('pages/' . $pageTemplate);
+            if ($pageTemplate !== 'default') {
+                print snippet('pages/' . $pageTemplate);
+            } else {
+                print snippet('pages/' . $page->uid());
+            }
         ?>
 
     </div>
