@@ -37,22 +37,8 @@ $friendListPage = $site->find('freunde-liste');
                     <aside class="widget">
                         <h3 class="title">Newsletter</h3>
                         <div class="widget-content">
-                            <p><?= l::get('newsletter_invitation_short') ?><br/>
-                                <a href="<?= $friendListPage->url() ?>"><?= l::get('newsletter_link_long_registration') ?></a>
-                            </p>
-                            <form method="post" action="<?= $site->url($site->language()->code()) ?>/newsletter/add" data-action="newsletter/add" class="registration-form registration-form-short js-registration-form">
-                                <p>
-                                    <input type="text" value="" name="name" placeholder="Name"
-                                           required="required" class="name">
-                                </p>
-                                <p>
-                                    <input type="email" value="" name="email" placeholder="Email"
-                                           required="required" class="email">
-                                </p>
-                                <p>
-                                    <button class="hvr-shutter-out-horizontal js-submit-registration">Subscribe</button>
-                                </p>
-                            </form>
+                            <p><?= l::get('newsletter_invitation_short') ?></p>
+                            <button class="hvr-shutter-out-horizontal" onclick="window.location.href = '<?= $friendListPage->url() ?>'"><?= l::get('newsletter_link_registration') ?></button>
                         </div>
                     </aside>
                 </div>
