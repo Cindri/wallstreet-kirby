@@ -130,6 +130,7 @@ h5.title.menu-title.home {
     color: #7c7c88;
 }
 
+/* Season Specials */
 .menu-inner.season-specials aside {
     font-size: 18pt;
 }
@@ -140,6 +141,21 @@ h5.title.menu-title.home {
 
 .menu-inner.season-specials aside .menu-price {
     font-size:22pt;
+}
+
+/* Speisen und Getränke */
+.menus-inner.menu-card aside .menu-content.menu-subline h5 {
+    font-size:32px;
+    margin-top: 20px;
+}
+.menus-inner.menu-card aside .menu-content.menu-subline p {
+    display:none;
+}
+.menus-inner.menu-card aside .menu-content.menu-subline .menu-title::after {
+    border: 0;
+}
+.menus-inner.menu-card aside .menu-content.menu-subline .menu-price {
+    display: none;
 }
 
 .button.single-gallery-navigation-link {

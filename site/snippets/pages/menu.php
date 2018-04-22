@@ -19,7 +19,7 @@
                         <?php endforeach ?>
                     </div>
                 </div>
-                <div class="menus-inner">
+                <div class="menus-inner menu-card">
                     <?php
                     $i = 0;
                     /** @var \Kirby\Panel\Models\Page $chapter */
@@ -44,6 +44,7 @@
                                                 ?>
                                                 <aside class="clearfix animated animation-delay-<?= (25 * $x) ?> <?php e(($i % 2 != 0), 'fadeInLeft', 'fadeInRight') ?>"
                                                        data-animate="<?php e(($i % 2 != 0), 'fadeInLeft', 'fadeInRight') ?>">
+
                                                     <?php
                                                     if ($image = $meal->image()->toFile()) :
                                                         ?>
@@ -51,13 +52,15 @@
                                                     <?php
                                                     endif;
                                                     ?>
-                                                    <div class="menu-content">
+
+                                                    <?php $isSubline = empty($meal->price()->toString()); ?>
+                                                    <div class="menu-content <?php e($isSubline, 'menu-subline') ?>">
                                                         <h5 class="title menu-title">
                                                             <span><?= $meal->name() ?></span>
                                                             <span class="menu-price">
-                                                            <i class="fa fa-usd"></i>
-                                                                <?= number_format($meal->price()->toString(), 2) ?>
-                                                        </span>
+                                                                <i class="fa fa-usd"></i>
+                                                                <?php e(!$isSubline, number_format(floatval($meal->price()->toString()), 2)); ?>
+                                                            </span>
                                                         </h5>
                                                         <p>
                                                             <?= $meal->description() ?>
