@@ -85,4 +85,20 @@ class PowerlunchService
         return $mealsOfCurrentWeek;
     }
 
+    /**
+     * Gibt das Start- und Enddatum einer Powerlunch-Woche zurück. Verwendet wegen Callback-Problem
+     * @param Page|null $week Die Woche (Unterseite), aus der die Daten ermittelt werden sollen
+     * @return array Ein Array mit Start- und Enddatum
+     */
+    public function getWeekDates($week) {
+        if (!$week instanceof Page) {
+            return [];
+        }
+
+        $currentWeekStartDate = new DateTime($week->start_date());
+        $currentWeekEndDate = new DateTime($week->end_date());
+
+        return ['start' => $currentWeekStartDate->format('d.m.Y'), 'end' => $currentWeekEndDate->format('d.m.Y')];
+    }
+
 }

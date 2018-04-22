@@ -101,16 +101,21 @@ class NewsletterController
 
         $mealDays = $this->powerlunchService->getMealsOfCurrentWeek($week);
 
+        $weekDates = $this->powerlunchService->getWeekDates($week);
+
         // Mapping der Kirby-Datenstrukur auf die Struktur, die im alten Verteiler verwendet wird
         $apiData = [];
+        $apiData['startDate'] = $weekDates['start'];
+        $apiData['endDate'] = $weekDates['end'];
+        $apiData['days'] = [];
         foreach ($mealDays as $dayName => $mealDay) {
-            $apiData[$dayName]['datum'] = $mealDay['date']->getTimestamp();
+            $apiData['days'][$dayName]['datum'] = $mealDay['date']->getTimestamp();
             $i = 1;
             foreach ($mealDay['meals'] as $meal) {
                 if ($i > 3) break;
-                $apiData[$dayName]['name' . $i] = $meal->name()->value();
-                $apiData[$dayName]['beschr' . $i] = $meal->description()->value();
-                $apiData[$dayName]['preis' . $i] = number_format(floatval($meal->price()->toString()), 2);
+                $apiData['days'][$dayName]['name' . $i] = $meal->name()->value();
+                $apiData['days'][$dayName]['beschr' . $i] = $meal->description()->value();
+                $apiData['days'][$dayName]['preis' . $i] = number_format(floatval($meal->price()->toString()), 2);
                 $i++;
             }
         }
