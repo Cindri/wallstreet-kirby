@@ -24,10 +24,20 @@
         <?php
         /** @var \Kirby\Panel\Models\Page $page */
             $pageTemplate = $page->intendedTemplate();
-            if ($pageTemplate !== 'default') {
-                print snippet('pages/' . $pageTemplate);
-            } else {
+            if ($pageTemplate == 'default') {
                 print snippet('pages/' . $page->uid());
+            }
+            else if ($pageTemplate == 'error') {
+                print snippet('pages/error');
+            }
+            else {
+                $snippets = $kirby->roots()->snippets();
+                $file = $snippets . DS . 'pages' . DS . $pageTemplate . '.php';
+                if (f::exists($file)) {
+                    print snippet('pages/' . $pageTemplate);
+                } else {
+                    redirect::to('error');
+                }
             }
         ?>
 
