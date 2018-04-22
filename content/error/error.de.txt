@@ -2,7 +2,7 @@ Title: Fehler
 
 ----
 
-Intro: Die Seite konnte nicht gefunden werden.
+Intro: 404 - Die Seite konnte nicht gefunden werden.
 
 ----
 

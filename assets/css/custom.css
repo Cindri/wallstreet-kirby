@@ -45,7 +45,7 @@
     background-color: #f89816;
 }
 
-.section.section-galleries {
+.section.section-galleries, .section.section-events {
     background-color: #efe6da;
 }
 
@@ -224,6 +224,11 @@ h5.title.menu-title.home {
 .footer-info button {
     background-color: white;
     color: black;
+}
+
+div.error-page, div.event-page {
+    font-size:22px;
+    line-height:26px;
 }
 
 input.input-standard {
