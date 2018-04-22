@@ -37,3 +37,10 @@ snippet('pages/menu', ['page' => $foodPage         ]);
 $drinkPage = $site->find('getraenke');
 snippet('pages/menu', ['page' => $drinkPage]);
 ?>
+
+<?php
+$eventPage = $site->find('event');
+if (!$eventPage->event_text()->empty()) {
+    snippet('pages/event', ['page' => $eventPage]);
+}
+?>
