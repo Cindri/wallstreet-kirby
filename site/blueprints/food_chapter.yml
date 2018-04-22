@@ -51,8 +51,6 @@ fields:
         type: image
         translate: false
 
-options:
-  status: false
 
 pages: false
 

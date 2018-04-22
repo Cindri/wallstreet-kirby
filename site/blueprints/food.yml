@@ -18,6 +18,7 @@ fields:
 
 pages:
   template: food_chapter
+  sortable: true
 
 options:
   preview: true
