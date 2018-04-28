@@ -34,9 +34,8 @@ if (!empty($currentSeasonSpecial)):
                                             <h5 class="title menu-title <?php if ($page->uid() == 'home'): ?>home<?php endif ?>">
                                                 <span><?= $seasonSpecial->name() ?></span>
                                                 <span class="menu-price">
-                                                            <i class="fa fa-usd"></i>
-                                                    <?= number_format($seasonSpecial->price()->toString(), 2) ?>
-                                                        </span>
+                                                    <?= number_format($seasonSpecial->price()->toString(), 2) ?> &euro;
+                                                </span>
                                             </h5>
                                             <p>
                                                 <?= $seasonSpecial->description()->kirbytext() ?>

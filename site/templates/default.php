@@ -25,7 +25,7 @@
         /** @var \Kirby\Panel\Models\Page $page */
             $pageTemplate = $page->intendedTemplate();
             if ($pageTemplate == 'default') {
-                print snippet('pages/' . $page->uid());
+                print snippet('pages/textpage');
             }
             else if ($pageTemplate == 'error') {
                 print snippet('pages/error');

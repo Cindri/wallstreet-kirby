@@ -18,3 +18,6 @@ fields:
       en: Event text
       de: Event-Text
     type:  textarea
+
+options:
+    delete: false

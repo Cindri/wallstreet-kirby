@@ -14,5 +14,5 @@ pages:
 icon: cutlery
 
 options:
+  delete: false
   template: false
-  status: false

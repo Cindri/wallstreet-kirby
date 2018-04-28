@@ -1,10 +1,8 @@
 <?php
 
-l::set('opening_hours', 'Öffnungszeiten');
-
 l::set('all', 'Alle');
 
-l::set('languages', 'Sprachen');
+l::set('languages', 'English');
 
 l::set('welcome', 'Willkommen');
 l::set('welcome_text', 'im Wallstreet im Hamilton Baden-Baden');

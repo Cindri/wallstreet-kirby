@@ -17,3 +17,6 @@ fields:
 icon: star
 pages:
   template: seasonspecial
+
+options:
+    delete: false

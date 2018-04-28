@@ -163,5 +163,4 @@ icon: calendar
 pages: false
 files: false
 options:
-  status: false
   template: false

@@ -12,3 +12,6 @@ fields:
   text:
     label: Text
     type:  textarea
+
+options:
+    delete: false

@@ -13,3 +13,6 @@ fields:
   disclaimer:
     label: Disclaimer
     type: textarea
+
+options:
+    delete: false

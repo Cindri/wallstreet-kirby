@@ -35,7 +35,8 @@
     padding: 50px;
     display: block !important;
     color: #EEEEEE;
-    background-color: #e27900;
+    background-color: gray;
+    opacity: 0.85;
     -webkit-transition: background-color 0.5s ease-out;
     transition: background-color 0.5s ease-out;
     cursor: pointer;
@@ -120,6 +121,11 @@ p.desc.banner-text {
     background-color:rgba(0, 0, 0, 0.7);
 }
 
+.section.powerlunch-section {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
 h5.title.menu-title.home {
     background-color: transparent;
     color: white;
@@ -149,7 +155,7 @@ h5.title.menu-title.home {
     margin-top: 20px;
 }
 .menus-inner.menu-card aside .menu-content.menu-subline p {
-    display:none;
+    /* display:none; */
 }
 .menus-inner.menu-card aside .menu-content.menu-subline .menu-title::after {
     border: 0;
@@ -263,4 +269,8 @@ input.input-standard:focus {
 .js-submit-registration[disabled] {
     cursor: not-allowed;
     background-color: darkgray;
+}
+
+.orange {
+    color: #e27900;
 }

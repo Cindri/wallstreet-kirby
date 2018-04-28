@@ -11,6 +11,3 @@ Copyright: © 2009–(date: Year) (link: http://getkirby.com text: Das Kirby-Tea
 ----
 
 Opening-hours: 
-
-**Mo - Fr**: 09:00 - 01:00
-**Sa, So**: 10:00 - 02:00

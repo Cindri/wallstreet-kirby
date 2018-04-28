@@ -58,13 +58,10 @@
                                                         <h5 class="title menu-title">
                                                             <span><?= $meal->name() ?></span>
                                                             <span class="menu-price">
-                                                                <i class="fa fa-usd"></i>
-                                                                <?php e(!$isSubline, number_format(floatval($meal->price()->toString()), 2)); ?>
+                                                                <?php e(!$isSubline, number_format(floatval($meal->price()->toString()), 2)); ?> &euro;
                                                             </span>
                                                         </h5>
-                                                        <p>
-                                                            <?= $meal->description() ?>
-                                                        </p>
+                                                        <?= $meal->description()->kirbytext() ?>
                                                     </div>
                                                 </aside>
                                                 <?php
@@ -73,6 +70,10 @@
                                         endif;
                                         ?>
                                     </div>
+
+                                    <?php if (!$chapter->chapter_text()->empty()): ?>
+                                    <p><?= $chapter->chapter_text()->kirbytext() ?></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </section>

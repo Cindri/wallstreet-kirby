@@ -27,11 +27,11 @@ if (!empty($currentPowerlunchWeek)):
                         $i = 1;
                         foreach ($dayData['meals'] as $meal):
                             ?>
-                            <section class="section menu-item">
+                            <section class="section menu-item powerlunch-section">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <?php if ($i == 1): ?> <h3
-                                                class="title"><?= l::get(strtolower($dayName)) . ', ' . $dayDate->format('d.m.') ?></h3> <?php endif ?>
+                                                class="title orange"><?= l::get(strtolower($dayName)) . ', ' . $dayDate->format('d.m.') ?></h3> <?php endif ?>
                                         <div class="menu-inner season-specials">
                                             <aside class="clearfix animated animation-delay-25 fadeInRight"
                                                    data-animate="fadeInRight">
@@ -39,8 +39,7 @@ if (!empty($currentPowerlunchWeek)):
                                                     <h5 class="title menu-title">
                                                         <span><?= $meal->name() ?></span>
                                                         <span class="menu-price">
-                                                            <i class="fa fa-usd"></i>
-                                                            <?= number_format(floatval($meal->price()->toString()), 2) ?>
+                                                            <?= number_format(floatval($meal->price()->toString()), 2) ?> &euro;
                                                         </span>
                                                     </h5>
                                                     <p>

@@ -11,10 +11,10 @@
 
             <div class="col-sm-6 col-sm-pull-6">
                 <h1 class="title line-title">
-                    <?= l::get('opening_hours') ?><i class="fa">&#xf111;</i>
+                    <?= $page->title()->text() ?><i class="fa">&#xf111;</i>
                 </h1>
                 <aside>
-                    <?= $site->opening_hours()->kirbytext() ?>
+                    <?= $page->text()->kirbytext() ?>
                 </aside>
             </div>
         </div>
