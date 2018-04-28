@@ -17,6 +17,7 @@
     <?= css('assets/css/responsive.css') ?>
     <?= css('assets/css/color/default.css') ?>
     <?= css('assets/css/custom.css') ?>
+    <?= css('assets/css/magnific-popup.css') ?>
 
     <?= css('assets/flags/flags.min.css') ?>
 
@@ -31,7 +32,7 @@
     <?= js('assets/js/vendor/sticky.min.js') ?>
     <?= js('assets/js/vendor/isotope.pkgd.min.js') ?>
     <?= js('assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') ?>
-
+    <?= js('assets/js/vendor/jquery.magnific-popup.min.js') ?>
     <!--
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>

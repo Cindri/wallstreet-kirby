@@ -401,6 +401,11 @@
             });
         }
 
+        // Bilder Popup
+        $('.menu-expand-image').magnificPopup({
+            type: 'image'
+        });
+
         $('.js-submit-registration').click(function (event) {
             event.preventDefault();
             var $form = $(this).closest('.registration-form');

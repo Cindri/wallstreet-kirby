@@ -31,7 +31,7 @@
                                     <h1 class="title"><?= $chapter->title() ?></h1>
                                     <?php if (!empty($image = $chapter->chapter_image()->toFile())) : ?>
                                         <figure class="menu-thumbnail">
-                                            <img src="<?= $image->url() ?>"/>
+                                            <a href="<?= $image->url() ?>" class="menu-expand-image"><img src="<?= $image->url() ?>"/></a>
                                         </figure>
                                     <?php endif ?>
                                 </div>
@@ -48,7 +48,7 @@
                                                     <?php
                                                     if ($image = $meal->image()->toFile()) :
                                                         ?>
-                                                        <img class="menu-img" src="<?= $image->url() ?>"/>
+                                                        <a href="<?= $image->url() ?>" class="menu-expand-image"><img class="menu-img" src="<?= $image->url() ?>"/></a>
                                                     <?php
                                                     endif;
                                                     ?>
