@@ -1,0 +1,18 @@
+title: Impressum
+
+fields:
+  title:
+    label: Title
+    type:  text
+
+  imprint:
+    label: Impressum
+    type:  textarea
+    translate: false
+
+  disclaimer:
+    label: Disclaimer
+    type: textarea
+
+options:
+    delete: false
