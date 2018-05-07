@@ -33,3 +33,6 @@ Icon
 
 #Blueprint examples
 /site/blueprints/examples/*
+
+#Alte Skripte nicht versionieren
+/site/controllers/Newsletter/old/*

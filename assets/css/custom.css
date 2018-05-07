@@ -29,11 +29,10 @@
 
 #banner a.banner-link {
     width: 100%;
-    font-size:22pt;
-    margin-top: 10px;
+    font-size:26pt;
     line-height: 28pt;
     font-weight: bold;
-    padding: 30px 40px;
+    padding: 50px;
     display: block !important;
     color: #EEEEEE;
     background-color: gray;
@@ -163,10 +162,6 @@ h5.title.menu-title.home {
 }
 .menus-inner.menu-card aside .menu-content.menu-subline .menu-price {
     display: none;
-}
-
-.menus .filter .button {
-    margin-bottom: 10px;
 }
 
 .button.single-gallery-navigation-link {
