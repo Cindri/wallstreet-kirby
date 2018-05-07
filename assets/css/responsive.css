@@ -703,7 +703,7 @@ Content Tabel
 		padding-top: 35px;
 	}
 	.nivo-caption-content{
-		display: none;
+		/* display: none; */
 	}
 	.style-v3 .nivo-caption-content,
 	.style-v2 .nivo-caption-content{

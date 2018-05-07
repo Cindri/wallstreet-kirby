@@ -29,10 +29,11 @@
 
 #banner a.banner-link {
     width: 100%;
-    font-size:26pt;
+    font-size:22pt;
+    margin-top: 10px;
     line-height: 28pt;
     font-weight: bold;
-    padding: 50px;
+    padding: 30px 40px;
     display: block !important;
     color: #EEEEEE;
     background-color: gray;
