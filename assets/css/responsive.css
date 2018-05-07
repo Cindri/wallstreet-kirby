@@ -158,9 +158,10 @@ Content Tabel
 	.header-top {
     	margin-bottom: 15px;
     }
-    .page-header .title{
-    	bottom: 0;
-    }
+    .page-header .title {
+		bottom: 0;
+	}
+
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -267,6 +268,7 @@ Content Tabel
     	padding-top: 50px;
     	position: static;
     }
+
     .style-v2 .page-header .title,
     .style-v3 .page-header .title{
     	color: #FFF !important;
@@ -701,7 +703,7 @@ Content Tabel
 		padding-top: 35px;
 	}
 	.nivo-caption-content{
-		display: none;
+		/* display: none; */
 	}
 	.style-v3 .nivo-caption-content,
 	.style-v2 .nivo-caption-content{

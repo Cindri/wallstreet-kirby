@@ -36,6 +36,9 @@ if (!$ajax):
     <div class="main-content" id="main-content">
     <section class="section section-galleries">
     <div class="container-fluid no-padding">
+        <h1 class="title title-center">
+            <?= $galleryMainPage->title()->text() . ': ' . $galleryPage->title()->text() ?>
+        </h1>
         <div class="single-gallery-navigation">
             <button data-ref="<?= $galleryMainPage->url() ?>" class="button single-gallery-navigation-link"><?= l::get('all'); ?></button>
             <?php

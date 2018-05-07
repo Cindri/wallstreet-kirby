@@ -24,7 +24,7 @@
             <ul class="nav navbar-nav">
                 <?php foreach ($mainPages as $mainPage) : ?>
                     <li<?php e($mainPage->isOpen(), ' class="active"') ?>><a href="<?= $mainPage->url() ?>"><?= $mainPage->title() ?></a>
-                        <?php if ($mainPage->hasVisibleChildren()): ?>
+                        <?php if ($mainPage->hasVisibleChildren() && $mainPage->uid() != 'speisen' && $mainPage->uid() != 'getraenke'): ?>
                             <div class="dropdown">
                                 <ul class="sub-menu">
                                     <?php foreach ($mainPage->children()->visible() as $subPage) : ?>

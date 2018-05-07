@@ -1,3 +1,9 @@
+
+<?php
+/** @var \Kirby\Panel\Models\Page $friendListPage */
+$friendListPage = $site->find('freunde-liste');
+?>
+
 <footer id="footer">
     <div class="footer-info">
         <div class="container">
@@ -31,21 +37,8 @@
                     <aside class="widget">
                         <h3 class="title">Newsletter</h3>
                         <div class="widget-content">
-                            <p>If you world like sign-up to the origin
-                                newsletter,please enter your email address below</p>
-                            <form method="post" action="#">
-                                <p>
-                                    <input type="text" value="" name="name" placeholder="Name"
-                                           required="required" class="name">
-                                </p>
-                                <p>
-                                    <input type="email" value="" name="email" placeholder="Email"
-                                           required="required" class="email">
-                                </p>
-                                <p>
-                                    <button class="hvr-shutter-out-horizontal">Subscribe</button>
-                                </p>
-                            </form>
+                            <p><?= l::get('newsletter_invitation_short') ?></p>
+                            <button class="hvr-shutter-out-horizontal" onclick="window.location.href = '<?= $friendListPage->url() ?>'"><?= l::get('newsletter_link_registration') ?></button>
                         </div>
                     </aside>
                 </div>
@@ -70,7 +63,7 @@
     <div class="copyright">
         <div class="container">
             <p>
-                Copyright &copy; 2015 <a href="http://themeforest.net/user/mtheme_market">mTheme</a>. All Rights Reserved.
+                Copyright &copy; <?= date('Y') ?> <?= l::get('copyright_notice') ?>
             </p>
         </div>
     </div>

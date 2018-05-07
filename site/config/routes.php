@@ -1,6 +1,6 @@
 <?php
-
-require_once('site/controllers/Newsletter/NewsletterController.php');
+require_once(__ROOT__ . '/languages/routingMessages.php');
+require_once __ROOT__ . '/controllers/Newsletter/NewsletterController.php';
 
 c::set('routes', [
     // Ajax-Route für Galerien
@@ -19,10 +19,12 @@ c::set('routes', [
     ],
     // Newsletter-Routes
     [
-        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)/(:any?)',
+        'pattern' => '(?:([a-z]{2})/?)?newsletter/(:alpha)',
         'action' => function($lang, $action, $data = null) {
-            // Action
-            $action = strtolower(trim($action));
+            if (empty($lang)) {
+                $lang = 'de';
+            }
+            $action = trim($action) . 'Action';
             // Controller laden
             $controller = new NewsletterController($lang, $data);
             if (method_exists($controller, $action)) {

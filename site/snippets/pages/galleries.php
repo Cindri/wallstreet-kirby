@@ -3,8 +3,12 @@ $galleryMainPage = $site->find('galerien');
 $galleryList = $galleryMainPage->children();
 ?>
 <section id="galleries" class="galleries galleries-v1 section section-galleries">
+
+    <h1 class="title title-center">
+        <span class="line-title"><?= $galleryMainPage->title() ?><i class="fa"></i></span>
+    </h1>
+
     <div class="container">
-        <h1 class="title title-center"><?= $galleryMainPage->title() ?></h1>
         <div class="filter-sticky">
             <div id="filter" class="filter">
                 <button class="button" data-filter="*"><?= l::get('all'); ?></button>
@@ -25,7 +29,7 @@ $galleryList = $galleryMainPage->children();
             foreach ($galleryList as $gallery):
                 $image = $gallery->image();
                 ?>
-                <div class="col-sm-6 col-xs-6 gallery-item <?= $gallery->uid() ?>">
+                <div class="col-xs-4 col-md-3 gallery-item <?= $gallery->uid() ?>">
                     <div class="inner">
                         <?php if ($image): ?>
                             <figure>
@@ -33,8 +37,7 @@ $galleryList = $galleryMainPage->children();
                                 <figcaption>
                                     <a class="gallery-ajax" href="#" data-url="<?= $gallery->url() ?>/ajax"></a>
                                     <div class="gallery-icon">
-                                        <a class="hvr-rectangle-out" href="#"></a>
-                                        <a class="hvr-rectangle-out gallery-ajax" href="#" data-url="<?= $gallery->url() ?>/ajax"></a>
+                                        <a class="hvr-rectangle-out gallery-ajax" href="#" data-url="<?= $gallery->url() ?>/ajax"><i class="fa fa-arrows-alt"></i></a>
                                     </div>
                                 </figcaption>
                             </figure>

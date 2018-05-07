@@ -11,10 +11,10 @@
 
             <div class="col-sm-6 col-sm-pull-6">
                 <h1 class="title line-title">
-                    <?= l::get('opening_hours') ?><i class="fa">&#xf111;</i>
+                    <?= $page->title()->text() ?><i class="fa">&#xf111;</i>
                 </h1>
                 <aside>
-                    <?= $site->opening_hours()->kirbytext() ?>
+                    <?= $page->text()->kirbytext() ?>
                 </aside>
             </div>
         </div>
@@ -30,5 +30,17 @@ snippet('pages/seasonspecials_content', ['seasonSpecialsPage' => $powerlunchPage
 
 <?php
 $foodPage = $site->find('speisen');
-snippet('pages/menu', ['page' => $foodPage]);
+snippet('pages/menu', ['page' => $foodPage         ]);
+?>
+
+<?php
+$drinkPage = $site->find('getraenke');
+snippet('pages/menu', ['page' => $drinkPage]);
+?>
+
+<?php
+$eventPage = $site->find('event');
+if (!$eventPage->event_text()->empty()) {
+    snippet('pages/event', ['page' => $eventPage]);
+}
 ?>

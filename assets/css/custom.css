@@ -1,3 +1,13 @@
+.page-header {
+    position: static;
+}
+
+.page-header h1.title {
+    position: static;
+    margin-top: 50px;
+    color: black;
+}
+
 .page-header figure {
     overflow: hidden;
     max-height: 400px;
@@ -17,7 +27,27 @@
     color: black;
 }
 
-.section.section-galleries {
+#banner a.banner-link {
+    width: 100%;
+    font-size:22pt;
+    margin-top: 10px;
+    line-height: 28pt;
+    font-weight: bold;
+    padding: 30px 40px;
+    display: block !important;
+    color: #EEEEEE;
+    background-color: gray;
+    opacity: 0.85;
+    -webkit-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+    cursor: pointer;
+}
+#banner a.banner-link:hover {
+    color: white;
+    background-color: #f89816;
+}
+
+.section.section-galleries, .section.section-events {
     background-color: #efe6da;
 }
 
@@ -30,6 +60,30 @@ li > .dropdown {
     z-index: 99;
 }
 
+h1.title {
+    font-size: 52px;
+    font-weight: bold;
+}
+
+h1.title.shadow {
+    text-shadow: 2px 1px 1px white;
+}
+
+.title.title-center {
+    text-align:center;
+    margin-bottom: 30px;
+}
+
+h1 span.line-title.white {
+    color: white;
+}
+
+p.desc.banner-text {
+    text-shadow: 1px 1px 0 white;
+    font-size: 36px;
+    line-height: 40px;
+}
+
 .single-gallery {
     -webkit-transition: opacity 1s ease 1s;
     transition: opacity 1s ease 1s;
@@ -39,6 +93,20 @@ li > .dropdown {
     width: 100%;
     overflow: hidden;
 }
+
+
+/* Gallery Bootstrap Fix */
+@media (max-width: 991px) {
+    .galleries .gallery-item.col-xs-4 {
+        width: 32.4%;
+    }
+}
+@media (min-width: 992px) {
+    .galleries .gallery-item.col-md-3 {
+        width: 24.5%;
+    }
+}
+
 
 .single-gallery-inner {
     padding: 50px 0;
@@ -50,6 +118,26 @@ li > .dropdown {
     padding: 15px 0;
 }
 
+#seasonspecials .menus.home {
+    background-color:rgba(0, 0, 0, 0.7);
+}
+
+.section.powerlunch-section {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+h5.title.menu-title.home {
+    background-color: transparent;
+    color: white;
+    border-bottom: 1px dashed white;
+}
+
+.season-specials p {
+    color: #7c7c88;
+}
+
+/* Season Specials */
 .menu-inner.season-specials aside {
     font-size: 18pt;
 }
@@ -60,6 +148,25 @@ li > .dropdown {
 
 .menu-inner.season-specials aside .menu-price {
     font-size:22pt;
+}
+
+/* Speisen und Getränke */
+.menus-inner.menu-card aside .menu-content.menu-subline h5 {
+    font-size:32px;
+    margin-top: 20px;
+}
+.menus-inner.menu-card aside .menu-content.menu-subline p {
+    /* display:none; */
+}
+.menus-inner.menu-card aside .menu-content.menu-subline .menu-title::after {
+    border: 0;
+}
+.menus-inner.menu-card aside .menu-content.menu-subline .menu-price {
+    display: none;
+}
+
+.menus .filter .button {
+    margin-bottom: 10px;
 }
 
 .button.single-gallery-navigation-link {
@@ -105,7 +212,70 @@ li > .dropdown {
     padding:0;
 }
 
-.title.title-center {
-    text-align:center;
-    margin-bottom: 30px;
+#footer {
+    background-color: black;
+}
+
+.footer-info {
+    color: white;
+}
+
+.footer-info h3 {
+    color: #efe6da;
+}
+
+.footer-info a {
+    color: #e27900;
+}
+
+.footer-info a:hover {
+    text-decoration: underline;
+}
+
+.footer-info button {
+    background-color: white;
+    color: black;
+}
+
+div.error-page, div.event-page {
+    font-size:22px;
+    line-height:26px;
+}
+
+input.input-standard {
+    line-height: 22px;
+    border: 1px solid;
+    background-color: transparent;
+    padding: 4px 5px;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    width: 100%;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+input.input-standard:focus {
+    border-color: #e27900;
+}
+
+.submit-button {
+    border: 0;
+    text-transform: uppercase;
+    width: auto;
+    padding: 0 20px;
+    line-height: 35px;
+}
+
+.submit-button::before {
+    background-color: #e27900;
+}
+
+.js-submit-registration[disabled] {
+    cursor: not-allowed;
+    background-color: darkgray;
+}
+
+.orange {
+    color: #e27900;
 }
