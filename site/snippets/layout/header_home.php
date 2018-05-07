@@ -60,8 +60,8 @@
                 <div class="nivo-caption-content">
 
                         <div class="row">
-                            <div class="col-sm-6 col-xs-6"><a class="banner-link" href="<?= $site->find('speisen')->url() ?>"><?= l::get('link_food'); ?></a></div>
-                            <div class="col-sm-6 col-xs-6"><a class="banner-link" href="<?= $site->find('getraenke')->url() ?>"><?= l::get('link_drinks'); ?></a></div>
+                            <div class="col-sm-6 col-xs-12"><a class="banner-link" href="<?= $site->find('speisen')->url() ?>"><?= l::get('link_food'); ?></a></div>
+                            <div class="col-sm-6 col-xs-12"><a class="banner-link" href="<?= $site->find('getraenke')->url() ?>"><?= l::get('link_drinks'); ?></a></div>
                         </div>
 
                 </div>
