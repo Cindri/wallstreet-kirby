@@ -27,7 +27,8 @@ $galleryList = $galleryMainPage->children();
             <?php
             /** @var \Kirby\Panel\Models\Page $gallery */
             foreach ($galleryList as $gallery):
-                $image = $gallery->image();
+                $images = $gallery->images()->sortBy('sort', 'asc');
+                $image = $images->first();
                 ?>
                 <div class="col-xs-4 col-md-3 gallery-item <?= $gallery->uid() ?>">
                     <div class="inner">

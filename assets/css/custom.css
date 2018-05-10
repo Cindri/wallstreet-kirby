@@ -118,10 +118,6 @@ p.desc.banner-text {
     padding: 15px 0;
 }
 
-#seasonspecials .menus.home {
-    background-color:rgba(0, 0, 0, 0.7);
-}
-
 .section.powerlunch-section {
     padding-bottom: 5px;
     padding-top: 5px;
@@ -139,18 +135,50 @@ h5.title.menu-title.home {
 
 /* Season Specials */
 .menu-inner.season-specials aside {
-    font-size: 18pt;
+    font-size: 17pt;
 }
 
 .menu-inner.season-specials aside .menu-title {
-    font-size:22pt;
+    font-size:20pt;
+}
+
+.section.big-menu h3 {
+    font-size: 20pt;
+    margin-bottom: 5px;
+    margin-top: 8px;
+}
+
+.section.menu-item.big-menu {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .menu-inner.season-specials aside .menu-price {
-    font-size:22pt;
+    font-size:18pt;
 }
 
 /* Speisen und Getränke */
+.menus aside {
+    margin-bottom: 5px;
+}
+
+h5.title.menu-title {
+    margin-bottom: 0;
+}
+
+.home .section .chapter-text {
+    margin-bottom:10px;
+    font-size: 14px;
+}
+
+.home .menus .section p {
+    line-height:18px;
+}
+
+.menus-inner .menu-content p {
+    margin-bottom: 10px;
+}
+
 .menus-inner.menu-card aside .menu-content.menu-subline h5 {
     font-size:32px;
     margin-top: 20px;

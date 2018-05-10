@@ -27,7 +27,7 @@ if (!empty($currentPowerlunchWeek)):
                         $i = 1;
                         foreach ($dayData['meals'] as $meal):
                             ?>
-                            <section class="section menu-item powerlunch-section">
+                            <section class="section menu-item powerlunch-section big-menu">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <?php if ($i == 1): ?> <h3
@@ -42,12 +42,12 @@ if (!empty($currentPowerlunchWeek)):
                                                             <?= number_format(floatval($meal->price()->toString()), 2) ?> &euro;
                                                         </span>
                                                     </h5>
-                                                    <p>
+                                                    <div>
                                                         <?= $meal->description()->kirbytext() ?>
-                                                    </p>
-                                                    <p>
+                                                    </div>
+                                                    <div style="font-style:italic;">
                                                         <?= $meal->description_additional()->kirbytext() ?>
-                                                    </p>
+                                                    </div>
                                                 </div>
                                             </aside>
                                         </div>

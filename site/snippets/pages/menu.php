@@ -72,7 +72,7 @@
                                     </div>
 
                                     <?php if (!$chapter->chapter_text()->empty()): ?>
-                                    <p><?= $chapter->chapter_text()->kirbytext() ?></p>
+                                    <div class="chapter-text"><?= $chapter->chapter_text()->kirbytext() ?></div>
                                     <?php endif; ?>
                                 </div>
                             </div>

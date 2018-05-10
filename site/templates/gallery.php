@@ -59,10 +59,13 @@ endif
             <div class="gallery-flickity">
                 <?php
                 if ($galleryPage->hasImages()):
-                    foreach ($galleryPage->images() as $image):
+                    foreach ($galleryPage->images()->sortBy('sort', 'asc') as $image):
                         ?>
                         <div class="gallery-cell">
                             <img alt="" src="<?= $image->url() ?>">
+                            <div style="color:white;">
+                                <?= $image->caption()->text() ?>
+                            </div>
                         </div>
                     <?php
                     endforeach;

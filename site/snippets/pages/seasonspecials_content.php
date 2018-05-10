@@ -24,7 +24,7 @@ if (!empty($currentSeasonSpecial)):
                 <?php
                 foreach ($currentSeasonSpecial->seasonspecials()->toStructure() as $seasonSpecial):
                     ?>
-                    <section class="section menu-item">
+                    <section class="section menu-item big-menu">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="menu-inner season-specials">
@@ -34,15 +34,15 @@ if (!empty($currentSeasonSpecial)):
                                             <h5 class="title menu-title <?php if ($page->uid() == 'home'): ?>home<?php endif ?>">
                                                 <span><?= $seasonSpecial->name() ?></span>
                                                 <span class="menu-price">
-                                                    <?= number_format($seasonSpecial->price()->toString(), 2) ?> &euro;
+                                                    <?= number_format(floatval($seasonSpecial->price()->toString()), 2) ?> &euro;
                                                 </span>
                                             </h5>
-                                            <p>
+                                            <div>
                                                 <?= $seasonSpecial->description()->kirbytext() ?>
-                                            </p>
-                                            <p>
+                                            </div>
+                                            <div style="font-style: italic;">
                                                 <?= $seasonSpecial->description_additional()->kirbytext() ?>
-                                            </p>
+                                            </div>
                                         </div>
                                     </aside>
                                 </div>
