@@ -10,6 +10,10 @@ files:
     caption:
       label: Bild-Beschriftung
       type: textarea
+    sort:
+      type: number
+      label: Position
+      step: 1
   sortable: true
   max: 10
   type: image

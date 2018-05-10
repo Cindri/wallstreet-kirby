@@ -19,7 +19,7 @@
 
                     <!-- Logo -->
                     <div id="logo" class="col-sm-4 logo col-sm-pull-4">
-                        <a href="/"><img alt="The Retation" src="<?= $kirby->urls()->assets() ?>/images/logo_wallstreet.png"></a>
+                        <img alt="The Retation" src="<?= $kirby->urls()->assets() ?>/images/logo_wallstreet.png">
                     </div>
 
                 </div>
@@ -47,16 +47,6 @@
                 endforeach ?>
             </div>
             <div id="nivoCaption-1" class="nivo-html-caption">
-                <div class="nivo-caption-content">
-                    <h1 class="line-title title shadow animated animation-delay-75" data-animate="fadeInUp">
-                        <?= l::get('welcome') ?><i class="fa">&#xf111;</i>
-                    </h1>
-                    <p class="desc banner-text animated animation-delay-100" data-animate="fadeInUp">
-                        <?= l::get('welcome_text') ?>
-                    </p>
-                </div>
-            </div>
-            <div id="nivoCaption-2" class="nivo-html-caption">
                 <div class="nivo-caption-content">
 
                         <div class="row">

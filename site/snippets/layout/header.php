@@ -19,7 +19,7 @@
 
                     <!-- Logo -->
                     <div id="logo" class="col-sm-4 logo col-sm-pull-4">
-                        <a href="/"><img alt="The Retation" src="<?= $kirby->urls()->assets() ?>/images/logo_wallstreet.png"></a>
+                        <img alt="The Retation" src="<?= $kirby->urls()->assets() ?>/images/logo_wallstreet.png">
                     </div>
 
                 </div>

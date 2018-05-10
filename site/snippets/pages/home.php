@@ -29,18 +29,20 @@ snippet('pages/seasonspecials_content', ['seasonSpecialsPage' => $powerlunchPage
 ?>
 
 <?php
-$foodPage = $site->find('speisen');
-snippet('pages/menu', ['page' => $foodPage         ]);
-?>
-
-<?php
-$drinkPage = $site->find('getraenke');
-snippet('pages/menu', ['page' => $drinkPage]);
-?>
-
-<?php
 $eventPage = $site->find('event');
 if (!$eventPage->event_text()->empty()) {
     snippet('pages/event', ['page' => $eventPage]);
 }
 ?>
+
+<section id="anfahrt">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12" style="padding-left: 0; padding-right: 0">
+                <a href="https://goo.gl/maps/SZsg9yeokyy" target="_blank">
+                    <img src="assets/images/home/screenshot_anfahrt.jpg" style="width:100%; height: auto;" />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

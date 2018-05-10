@@ -2,6 +2,10 @@ title: Season Specials - Speisen
 
 fields:
 
+  title:
+    type: text
+    label: Titel
+
   start_date:
     label: Start-Datum
     type: date

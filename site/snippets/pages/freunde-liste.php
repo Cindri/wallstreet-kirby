@@ -22,20 +22,8 @@
                         <input type="tel" name="fax" id="fax" class="input-standard" />
                     </div>
                     <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" required="required" id="name" class="input-standard" />
-
-                        <label for="street">Straße:</label>
-                        <input type="text" name="street" id="street" class="input-standard" />
-
-                        <label for="city">Ort:</label>
-                        <input type="text" name="city" id="city" class="input-standard" />
-
-                        <label for="phone">Telefon:</label>
-                        <input type="tel" name="phone" id="phone" class="input-standard" />
-                    </div>
-                    <div class="form-group">
-                        <button class="submit-button hvr-shutter-out-horizontal js-submit-registration">Subscribe</button>
+                        <button class="submit-button hvr-shutter-out-horizontal js-submit-registration">Eintragen</button>
+                        <button class="submit-button hvr-shutter-out-horizontal">Abmelden</button>
                     </div>
                 </form>
             </div>
