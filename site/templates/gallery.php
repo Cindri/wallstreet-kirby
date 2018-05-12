@@ -64,7 +64,7 @@ endif
                         <div class="gallery-cell">
                             <img alt="" src="<?= $image->url() ?>">
                             <div style="color:white;">
-                                <?= $image->caption()->text() ?>
+                                <?= $image->caption()->kirbytext() ?>
                             </div>
                         </div>
                     <?php
@@ -76,7 +76,7 @@ endif
                 <p><?= $galleryPage->caption()->kirbytext() ?></p>
                 <div class="gallery-meta">
                     <div class="gallery-date">
-                        <label>Galerie:</label> <?= $galleryPage->headline()->text() ?>
+                        <label><?= l::get('gallery') ?>:</label> <?= $galleryPage->headline()->text() ?>
                     </div>
                 </div>
             </aside>
