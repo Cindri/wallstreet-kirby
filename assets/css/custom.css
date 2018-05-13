@@ -23,6 +23,14 @@
     overflow:hidden;
 }
 
+#banner .nivo-caption {
+
+}
+
+.infoUs .title {
+    width:auto;
+}
+
 #banner .nivoSlider .nivo-caption-content, #banner .nivoSlider .nivo-caption-content .title {
     color: black;
 }
@@ -31,9 +39,9 @@
     width: 100%;
     font-size:22pt;
     margin-top: 10px;
-    line-height: 28pt;
+    line-height: 24pt;
     font-weight: bold;
-    padding: 30px 40px;
+    padding: 15px 25px;
     display: block !important;
     color: #EEEEEE;
     background-color: gray;

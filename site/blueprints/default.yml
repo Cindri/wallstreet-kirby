@@ -1,10 +1,16 @@
-title: Page
+title: Franks neue Seite
 
 template: textpage
 
 fields:
   title:
     label: Title
+    type:  text
+
+  content_title:
+    label:
+      en: Event title
+      de: Event-Titel
     type:  text
 
   text:

@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-sm-4 header-right col-sm-push-4  col-xs-6">
                         <ul class="nav">
-                            <li><a href="<?= $site->find('freunde-liste')->url() ?>"><?= $site->find('freunde-liste')->title() ?></a></li>
+                            <li><a href="<?= $site->find('freunde-liste')->url() ?>"><?= l::get('friend_list') ?></a></li>
                         </ul>
                     </div>
 

@@ -10,7 +10,7 @@ $friendListPage = $site->find('freunde-liste');
             <div class="row">
                 <div class="col-sm-4">
                     <aside class="widget">
-                        <h3 class="title">Seiten</h3>
+                        <h3 class="title"><?= l::get('pages') ?></h3>
                         <div class="widget-content">
                             <ul>
                                 <?php foreach ($mainPages as $mainPage) : ?>
@@ -22,22 +22,22 @@ $friendListPage = $site->find('freunde-liste');
                 </div>
                 <div class="col-sm-4">
                     <aside class="widget">
-                        <h3 class="title">Zusätzliches</h3>
+                        <h3 class="title"><?= l::get('additional') ?></h3>
                         <div class="widget-content">
                             <ul>
-                                <li><a href="<?= $site->find('freunde-liste')->url() ?>">Freunde-Liste</a></li>
-                                <li><a href="http://extern.panten.de/wallstreet/epaper/index" target="_blank">E-Paper</a></li>
-                                <li><a href="<?= $site->find('impressum')->url() ?>">Impressum</a></li>
-                                <li><a href="<?= $site->find('datenschutz')->url() ?>">Datenschutzerklärung</a></li>
-                                <li><a href="<?= $site->find('zusatzstoffe')->url() ?>">Zusatzstoffe</a></li>
-                                <li><a href="<?= $site->find('kontakt')->url() ?>">Kontakt</a></li>
+                                <li><a href="<?= $site->find('freunde-liste')->url() ?>"><?= l::get('friend_list') ?></a></li>
+                                <li><a href="http://extern.panten.de/wallstreet/epaper/index" target="_blank"><?= l::get('epaper') ?></a></li>
+                                <li><a href="<?= $site->find('impressum')->url() ?>"><?= l::get('imprint') ?></a></li>
+                                <li><a href="<?= $site->find('datenschutz')->url() ?>"><?= l::get('data_policy') ?></a></li>
+                                <li><a href="<?= $site->find('zusatzstoffe')->url() ?>"><?= l::get('ingredients') ?></a></li>
+                                <li><a href="<?= $site->find('kontakt')->url() ?>"><?= l::get('contact') ?></a></li>
                             </ul>
                         </div>
                     </aside>
                 </div>
                 <div class="col-sm-4">
                     <aside class="widget">
-                        <h3 class="title">Freunde-Liste</h3>
+                        <h3 class="title"><?= l::get('friend_list') ?></h3>
                         <div class="widget-content">
                             <p><?= l::get('newsletter_invitation_short') ?></p>
                             <button class="hvr-shutter-out-horizontal" onclick="window.location.href = '<?= $friendListPage->url() ?>'"><?= l::get('newsletter_link_registration') ?></button>

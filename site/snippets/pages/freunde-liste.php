@@ -15,15 +15,15 @@
             <div class="col-lg-6 col-lg-pull-6">
                 <form action="newsletter/add" class="registration-form js-registration-form" method="POST">
                     <div class="form-group">
-                        <label for="email">E-Mail:</label>
+                        <label for="email"><?= l::get('email') ?>:</label>
                         <input type="email" name="email" id="email" class="input-standard" />
 
-                        <label for="fax">Fax:</label>
+                        <label for="fax"><?= l::get('fax') ?>:</label>
                         <input type="tel" name="fax" id="fax" class="input-standard" />
                     </div>
                     <div class="form-group">
-                        <button class="submit-button hvr-shutter-out-horizontal js-submit-registration">Eintragen</button>
-                        <button class="submit-button hvr-shutter-out-horizontal">Abmelden</button>
+                        <button class="submit-button hvr-shutter-out-horizontal js-submit-registration"><?= l::get('checkin') ?></button>
+                        <button class="submit-button hvr-shutter-out-horizontal"><?= l::get('checkout') ?></button>
                     </div>
                 </form>
             </div>
