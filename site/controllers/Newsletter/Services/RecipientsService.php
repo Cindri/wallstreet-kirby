@@ -46,6 +46,20 @@ class RecipientsService
     }
 
     /**
+     * Gibt die ID eines Empfängers mit einer E-Mail oder Faxnummer zurück
+     * @param $email
+     * @param $fax
+     * @return mixed
+     */
+    public function getRecipient($email, $fax) {
+        $results = $this->newsletterTable->where(['email' => $email])->orWhere(['fax' => $fax])->order('datum DESC');
+        foreach ($results as $recipient) {
+            return $recipient;
+        }
+        return false;
+    }
+
+    /**
      * Fügt neuen Empfänger zum Verteiler hinzu
      * @param $email
      * @param string $fax
@@ -56,9 +70,9 @@ class RecipientsService
      * @return mixed
      */
     public function addNewRecipient($email, $fax = '', $name = '', $street = '', $city = '', $phone = '') {
-        $curDate = new \DateTime();
-
-        $id = $this->newsletterTable->insert([
+        $curDate = new DateTime();
+        $unique = uniqid(rand(0, 9999));
+        $this->newsletterTable->insert([
             'datum' => $curDate->getTimestamp(),
             'email' => $email,
             'fax' => $fax,
@@ -68,32 +82,79 @@ class RecipientsService
             'strasse' => $street,
             'ort' => $city,
             'telefon' => $phone,
-            'bestaetigt' => 0
+            'bestaetigt' => 0,
+            'unique' => $unique,
+            'date_confirmed' => NULL,
+            'date_unregister_request' => NULL,
+            'date_unregister' => NULL
         ]);
-
-        return $id;
+        return $unique;
     }
 
     /**
      * Bestätigt hinzugefügten Empfänger (nach Klick auf den Mail-Link)
-     * @param $code
-     * @param $type
+     * @param $unique
      * @return bool
      */
-    public function confirmRecipient($code, $type) {
-        if (empty($code)) {
-            return false;
-        }
-        if (!in_array($type, ['email', 'fax'])) {
-            return false;
-        }
-
+    public function confirmRecipient($unique) {
+        $curDate = new DateTime();
         $this->newsletterTable->values([
-            'bestaetigt' => 1
+            'bestaetigt' => 1,
+            'date_confirmed' => $curDate->getTimestamp()
         ]);
-        $this->newsletterTable->where($type . '_md5', '=', $code);
+        $this->newsletterTable
+            ->where(['unique' => $unique]);
 
         return $this->newsletterTable->update();
+    }
+
+    /**
+     * Aktualisiert einen Empfänger
+     * @param $id
+     * @param string $fax
+     * @param string $email
+     * @return bool
+     */
+
+    public function updateRecipient($id, $email = '', $fax = '') {
+
+        $updateValues = [];
+        $curDate = new DateTime();
+
+        if (!empty($email)) {
+            $updateValues['email'] = $email;
+        }
+        if (!empty($fax)) {
+            $updateValues['fax'] = $fax;
+        }
+        $updateValues['datum'] = $curDate->getTimestamp();
+
+        $this->newsletterTable
+            ->values($updateValues);
+        $this->newsletterTable
+            ->where(['id' => $id]);
+
+        return $this->newsletterTable->update();
+    }
+
+    public function requestUnregisterRecipient($email, $fax) {
+        $curDate = new DateTime();
+        $updateValues = [
+            'date_unregister_request' => $curDate->getTimestamp()
+        ];
+        $this->newsletterTable
+            ->values($updateValues);
+        $this->newsletterTable
+            ->where('date_unregister_request', '<>', NULL)
+            ->andWhere('date_unregister', '<>', NULL)
+            ->andWhere(['email' => $email])
+            ->orWhere(['fax' => $fax]);
+        $results = $this->newsletterTable->select('unique');
+        foreach ($results as $recipient) {
+            $unique = $recipient->unique();
+        }
+        $this->newsletterTable->update();
+        return isset($unique) ? $unique : false;
     }
 
     /**

@@ -32,18 +32,27 @@ class NewsletterController
     {
         $email = r::postData('email', '');
         $fax = r::postData('fax', '');
-        $name = r::postData('name', '');
-        $street = r::postData('street', '');
-        $city = r::postData('city', '');
-        $phone = r::postData('phone', '');
 
         if (empty($email) && empty($fax) || !empty($fax) && empty($phone)) {
             return \Response::error(ERROR_MSG[$this->lang]['error_newsletter_requirements'], 200);
         }
 
-        if ($insertId = $this->recipientsService->addNewRecipient($email, $fax, $name, $street, $city, $phone)) {
-            return \Response::success(ERROR_MSG[$this->lang]['newsletter_registration_success'], $this->lang . $insertId);
-        } else {
+        if ($recipient = $this->recipientsService->getRecipient($email, $fax)) {
+            if (!empty($recipient->date_unregister())) {
+                 $flag = $this->recipientsService->addNewRecipient($email, $fax);
+            }
+            else {
+                $flag = $this->recipientsService->updateRecipient($recipient->id(), $email, $fax);
+            }
+        }
+        else {
+            $flag = $this->recipientsService->addNewRecipient($email, $fax);
+        }
+
+        if ($flag) {
+            return \Response::success(ERROR_MSG[$this->lang]['newsletter_registration_success']);
+        }
+        else {
             return \Response::error(ERROR_MSG[$this->lang]['newsletter_registration_fail'], 200);
         }
     }

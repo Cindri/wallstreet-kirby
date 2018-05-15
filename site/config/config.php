@@ -23,6 +23,24 @@ c::set('debug', true);
 
 c::set('markdown.extra', true);
 
+
+
+// Einstellungen Newsletter-System
+
+c::set('owner', [
+    'mail' => 'info@wallstreet-hamilton.de',
+    'company' => 'Wallstreet im Hamilton',
+    'prename' => 'Frank',
+    'surname' => 'Schweikart'
+]);
+
+c::set('admin', [
+    'mail' => 'd.peter@panten.de',
+    'company' => 'Panten GmbH',
+    'prename' => 'David',
+    'surname' => 'Peter'
+]);
+
 /*
 
 ---------------------------------------
