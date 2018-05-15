@@ -118,32 +118,38 @@ class RecipientsService
 
     public function updateRecipient($id, $email = '', $fax = '') {
 
-        $updateValues = [];
+        $values = [];
         $curDate = new DateTime();
 
         if (!empty($email)) {
-            $updateValues['email'] = $email;
+            $values['email'] = $email;
         }
         if (!empty($fax)) {
-            $updateValues['fax'] = $fax;
+            $values['fax'] = $fax;
         }
-        $updateValues['datum'] = $curDate->getTimestamp();
+        $values['datum'] = $curDate->getTimestamp();
 
         $this->newsletterTable
-            ->values($updateValues);
+            ->values($values);
         $this->newsletterTable
             ->where(['id' => $id]);
 
         return $this->newsletterTable->update();
     }
 
+    /**
+     * Erzeugt die Bestätigungs-Mail zum Deaktivieren eines Empfängers
+     * @param $email
+     * @param $fax
+     * @return bool
+     */
     public function requestUnregisterRecipient($email, $fax) {
         $curDate = new DateTime();
-        $updateValues = [
+        $values = [
             'date_unregister_request' => $curDate->getTimestamp()
         ];
         $this->newsletterTable
-            ->values($updateValues);
+            ->values($values);
         $this->newsletterTable
             ->where('date_unregister_request', '<>', NULL)
             ->andWhere('date_unregister', '<>', NULL)
@@ -158,7 +164,19 @@ class RecipientsService
     }
 
     /**
-     * Löscht einen Empfänger aus dem Verteiler
+     * Deaktiviert einen Empfänger. Eine neue Registrierung wird in einem neuen Datensatz erfasst.
+     * @param $unique
+     * @return bool
+     */
+    public function unregisterRecipient($unique) {
+        $curDate = new DateTime();
+        $values['date_unregister'] = $curDate->getTimestamp();
+        $this->newsletterTable->where(['unique' => $unique]);
+        return $this->newsletterTable->update();
+    }
+
+    /**
+     * Löscht den Datensatz eines Empfänger aus dem Verteiler
      * @param $code
      * @param $type
      * @return bool

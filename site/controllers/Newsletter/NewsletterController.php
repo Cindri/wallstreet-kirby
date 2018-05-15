@@ -63,10 +63,10 @@ class NewsletterController
      */
     public function confirmAction()
     {
-        $code = get('code', '');
-        $type = get('art', 'email');
-        if (!empty($code)) {
-            if ($this->recipientsService->confirmRecipient($code, $type)) {
+        $unique = get('unique', '');
+
+        if (!empty($unique)) {
+            if ($this->recipientsService->confirmRecipient($unique)) {
                 return \Response::success('Confirm erfolgreich');
             }
         }
@@ -89,10 +89,10 @@ class NewsletterController
      */
     public function signoutAction()
     {
-        $code = get('code', '');
-        $type = get('art', 'email');
-        if (!empty($code)) {
-            if ($this->recipientsService->deleteRecipient($code, $type)) {
+        $unique = get('unique', '');
+
+        if (!empty($unique)) {
+            if ($this->recipientsService->unregisterRecipient($unique)) {
                 return \Response::success('User erfolgreich ausgetragen');
             }
         }
