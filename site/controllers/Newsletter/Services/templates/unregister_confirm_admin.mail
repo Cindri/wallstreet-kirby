@@ -1,0 +1,13 @@
+<html>
+		<head>
+		</head>
+		<body>
+			<h3>Ein Kunde möchte seine Faxnummer aus dem Info-Verteiler austragen.</h3>
+			Wenn der Kunde seine Abmeldung bestätigt hat, folgen Sie bitte diesem Link oder kopieren Ihn in die Adresszeile Ihres Browsers:<br>
+			<p>
+            <a href="%%baseurl%%/newsletter/signout?unique=%%unique%%">http://www.wallstreet-hamilton.de/powerlunch_abo/abo_delete.php?unique=%%unique%%</a>
+			Falls der Kunde später erneut auf den Verteiler möchte, muss er sich komplett neu wieder eintragen.
+			</p>
+			Dies ist eine automatisch generierte E-Mail.
+		</body>
+	</html>

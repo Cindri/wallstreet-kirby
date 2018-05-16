@@ -16,12 +16,15 @@ class NewsletterController
     /** @var PowerlunchService|null */
     private $powerlunchService = null;
 
+    private $mailService = null;
+
     public function __construct($lang = 'de', $data = [])
     {
         $this->lang = $lang;
         $this->data = $data;
         $this->recipientsService = new RecipientsService();
         $this->powerlunchService = new PowerlunchService($lang);
+        $this->mailService = new MailingService();
     }
 
     /**
@@ -39,17 +42,20 @@ class NewsletterController
 
         if ($recipient = $this->recipientsService->getRecipient($email, $fax)) {
             if (!empty($recipient->date_unregister())) {
-                 $flag = $this->recipientsService->addNewRecipient($email, $fax);
+                 $unique = $this->recipientsService->addNewRecipient($email, $fax);
+                 $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['unique' => $recipient->unique()]);
             }
             else {
-                $flag = $this->recipientsService->updateRecipient($recipient->id(), $email, $fax);
+                $unique = $this->recipientsService->updateRecipient($recipient->unique(), $email, $fax);
+                $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['unique' => $recipient->unique()]);
             }
         }
         else {
-            $flag = $this->recipientsService->addNewRecipient($email, $fax);
+            $unique = $this->recipientsService->addNewRecipient($email, $fax);
+            $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['unique' => $recipient->unique()]);
         }
 
-        if ($flag) {
+        if ($unique) {
             return \Response::success(ERROR_MSG[$this->lang]['newsletter_registration_success']);
         }
         else {
@@ -67,6 +73,7 @@ class NewsletterController
 
         if (!empty($unique)) {
             if ($this->recipientsService->confirmRecipient($unique)) {
+                $this->mailService->send('confirmation_customer', 'davidpeter1337@gmail.com', ['unique' => $unique]);
                 return \Response::success('Confirm erfolgreich');
             }
         }
@@ -93,6 +100,7 @@ class NewsletterController
 
         if (!empty($unique)) {
             if ($this->recipientsService->unregisterRecipient($unique)) {
+                $this->mailService->send('unregister_confirm_admin', 'davidpeter1337@gmail.com', ['baseurl' => 'http://upload.panten.de', 'unique' => $unique], 'Wallstreet Freunde-Liste: Austragen erfolgreich!');
                 return \Response::success('User erfolgreich ausgetragen');
             }
         }
@@ -130,12 +138,6 @@ class NewsletterController
         }
 
         return Response::json($apiData);
-    }
-
-    public function emailTestAction()
-    {
-        $test = $this->recipientsService->testEmail();
-        return Response::success($test);
     }
 
 }

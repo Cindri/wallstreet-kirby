@@ -12,7 +12,6 @@ class RecipientsService
 
     public function __construct()
     {
-        /*
         $this->db = new Database([
             'type' => 'mysql',
             'host' => 'wp126.webpack.hosteurope.de',
@@ -21,7 +20,6 @@ class RecipientsService
             'password' => 'pantenkunden'
         ]);
         $this->newsletterTable = $this->db->table('wallstreet_newsletter');
-        */
     }
 
     /**
@@ -114,13 +112,13 @@ class RecipientsService
 
     /**
      * Aktualisiert einen Empfänger
-     * @param $id
+     * @param $unique
      * @param string $fax
      * @param string $email
      * @return bool
      */
 
-    public function updateRecipient($id, $email = '', $fax = '') {
+    public function updateRecipient($unique, $email = '', $fax = '') {
 
         $values = [];
         $curDate = new DateTime();
@@ -136,9 +134,10 @@ class RecipientsService
         $this->newsletterTable
             ->values($values);
         $this->newsletterTable
-            ->where(['id' => $id]);
+            ->where(['unique' => $unique]);
 
-        return $this->newsletterTable->update();
+        $this->newsletterTable->update();
+        return $unique;
     }
 
     /**
@@ -194,15 +193,6 @@ class RecipientsService
         }
 
         return $this->newsletterTable->where($type . '_md5', '=', $code)->delete();
-    }
-
-    /**
-     * Testet die E-Mail-Funktionen
-     * @return string
-     */
-    public function testEmail() {
-        $mailer = new MailingService('confirmation_admin');
-        return $mailer->send('davidpeter1337@gmail.com', 'Test', ['code' => 'blabla']);
     }
 
 }
