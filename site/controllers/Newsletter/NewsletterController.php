@@ -132,4 +132,10 @@ class NewsletterController
         return Response::json($apiData);
     }
 
+    public function emailTestAction()
+    {
+        $test = $this->recipientsService->testEmail();
+        return Response::success($test);
+    }
+
 }

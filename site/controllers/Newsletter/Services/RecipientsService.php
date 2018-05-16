@@ -1,5 +1,7 @@
 <?php
 
+require_once('MailingService.php');
+
 class RecipientsService
 {
     /** @var Database|null $db */
@@ -10,6 +12,7 @@ class RecipientsService
 
     public function __construct()
     {
+        /*
         $this->db = new Database([
             'type' => 'mysql',
             'host' => 'wp126.webpack.hosteurope.de',
@@ -18,6 +21,7 @@ class RecipientsService
             'password' => 'pantenkunden'
         ]);
         $this->newsletterTable = $this->db->table('wallstreet_newsletter');
+        */
     }
 
     /**
@@ -190,6 +194,15 @@ class RecipientsService
         }
 
         return $this->newsletterTable->where($type . '_md5', '=', $code)->delete();
+    }
+
+    /**
+     * Testet die E-Mail-Funktionen
+     * @return string
+     */
+    public function testEmail() {
+        $mailer = new MailingService('confirmation_admin');
+        return $mailer->send('davidpeter1337@gmail.com', 'Test', ['code' => 'blabla']);
     }
 
 }

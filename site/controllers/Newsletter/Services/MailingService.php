@@ -3,7 +3,7 @@
 class MailingService
 {
     /** @var string */
-    private $mailRecipient = '';
+    private $mailTarget = '';
 
     /** @var string */
     private $mailTemplate = '';
@@ -13,25 +13,38 @@ class MailingService
 
 
     /**
-     * MailingService constructor.
-     * @param string $mailRecipient
+     * Erstellt den MailingService. Template siehe Dateien im Ordner "templates"
      * @param string $mailTemplate
      * @param string $placeholderDelimiter
      */
-    public function __construct(string $mailRecipient, string $mailTemplate, string $placeholderDelimiter = '%%')
+    public function __construct(string $mailTemplate, string $placeholderDelimiter = '%%')
     {
-        $this->mailRecipient = $mailRecipient;
         $this->mailTemplate = $mailTemplate;
         $this->placeholderDelimiter = $placeholderDelimiter;
     }
 
-    public function send(array $data = [], $subject = 'Wallstreet Powerlunch') {
-        if (!empty($this->mailRecipient) && !empty($this->mailTemplate)) {
-            $mailString = $this->getRenderedString($data);
+    public function setTemplate($template) {
+        $this->mailTemplate = $template;
+    }
+
+    public function setPlaceholderDelimiter($delimiter) {
+        $this->placeholderDelimiter = $delimiter;
+    }
+
+    /**
+     * Sendet eine E-Mail mit Daten für das Template
+     * @param string $to
+     * @param string $subject
+     * @param array $data
+     * @return bool
+     */
+    public function send(string $to, $subject = 'Wallstreet Powerlunch', array $data = []) {
+        if (!empty($this->mailTemplate)) {
+            $mailString = $this->getRenderedMailBody($data);
             $owner = c::get('owner');
             $email = email([
-                'to' => $this->mailRecipient,
-                'from' => $owner['email'],
+                'to' => $to,
+                'from' => $owner['mail'],
                 'subject' => $subject,
                 'body' => $mailString
             ]);
@@ -41,14 +54,14 @@ class MailingService
     }
 
     private function getRawTemplateContent() {
-        $filename = $this->mailTemplate . '_' . $this->mailRecipient . '.mail';
-        $filepath = 'templates/' . $filename;
+        $filename = $this->mailTemplate . '.mail';
+        $filepath = 'site/controllers/Newsletter/Services/templates/' . $filename;
 
         $rawString = trim(file_get_contents($filepath));
         return $rawString;
     }
 
-    private function getRenderedString($data) {
+    private function getRenderedMailBody($data) {
         $rawString = $this->getRawTemplateContent();
         $mailString = $rawString;
         foreach ($data as $key => $value) {
