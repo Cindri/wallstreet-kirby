@@ -10,12 +10,13 @@ class NewsletterController
 
     private $data = [];
 
-    /** @var RecipientsService|null $recipientsService */
+    /** @var RecipientsService|null  */
     private $recipientsService = null;
 
     /** @var PowerlunchService|null */
     private $powerlunchService = null;
 
+    /** @var MailingService|null  */
     private $mailService = null;
 
     public function __construct($lang = 'de', $data = [])
@@ -40,19 +41,22 @@ class NewsletterController
             return \Response::error(ERROR_MSG[$this->lang]['error_newsletter_requirements'], 200);
         }
 
-        if ($recipient = $this->recipientsService->getRecipient($email, $fax)) {
+        if ($recipient = $this->recipientsService->getActiveRecipient($email, $fax)) {
             if (!empty($recipient->date_unregister())) {
                  $unique = $this->recipientsService->addNewRecipient($email, $fax);
-                 $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['unique' => $recipient->unique()]);
+                 $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['baseurl' => 'http://upload.panten.de', 'unique' => $unique]);
+                 $this->mailService->send('registration_admin', c::get('owner')['mail'], ['baseurl' => 'http://upload.panten.de', 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Nutzer war schon einmal regisriert.']);
             }
             else {
                 $unique = $this->recipientsService->updateRecipient($recipient->unique(), $email, $fax);
-                $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['unique' => $recipient->unique()]);
+                $this->mailService->send('update_registration_customer', 'davidpeter1337@gmail.com', ['baseurl' => 'http://upload.panten.de', 'unique' => $unique]);
+                $this->mailService->send('update_registration_admin', c::get('owner')['mail'], ['baseurl' => 'http://upload.panten.de', 'email' => $email, 'fax' => $fax, 'unique' => $unique]);
             }
         }
         else {
             $unique = $this->recipientsService->addNewRecipient($email, $fax);
-            $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['unique' => $recipient->unique()]);
+            $this->mailService->send('registration_customer', 'davidpeter1337@gmail.com', ['baseurl' => 'http://upload.panten.de', 'unique' => $unique]);
+            $this->mailService->send('registration_admin', c::get('owner')['mail'], ['baseurl' => 'http://upload.panten.de', 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Dies ist ein neuer Nutzer!']);
         }
 
         if ($unique) {
@@ -73,21 +77,29 @@ class NewsletterController
 
         if (!empty($unique)) {
             if ($this->recipientsService->confirmRecipient($unique)) {
-                $this->mailService->send('confirmation_customer', 'davidpeter1337@gmail.com', ['unique' => $unique]);
-                return \Response::success('Confirm erfolgreich');
+                $this->mailService->send('confirmation_admin', c::get('owner')['mail'], ['unique' => $unique]);
+                return \Response::success('Ihre Eintragung wurde erfolgreich bestätigt. Sie sind nun in die Freunde-Liste des Wallstreet im Hamilton aufgenommen.');
             }
         }
-        return \Response::error('Fehler beim Bestätigen');
+        return \Response::error('Fehler beim Bestätigen der Registrierung. Versuchen Sie es später noch einmal oder kontaktieren Sie den Administrator der Seite.');
     }
 
-    /**
-     * Route zum Auflisten von Empfängern
-     * @return object
-     */
-    public function listAction()
+    public function signoutRequestAction()
     {
-        $list = $this->recipientsService->getList(20);
-        return \Response::success($list, $this->data);
+        $email = r::postData('email', '');
+        $fax = r::postData('fax', '');
+
+        if (empty($email) && empty($fax) || !empty($fax) && empty($phone)) {
+            return \Response::error(ERROR_MSG[$this->lang]['error_newsletter_requirements'], 200);
+        }
+
+        if ($unique = $this->recipientsService->requestUnregisterRecipient($email, $fax)) {
+            $this->mailService->send('unregister_request_customer', strval($email), ['baseurl' => 'http://upload.panten.de', 'unique' => $unique]);
+            $this->mailService->send('unregister_request_admin', c::get('owner')['mail'], ['baseurl' => 'http://upload.panten.de', 'unique' => $unique]);
+            return \Response::success('Bitte bestätigen Sie die Austragung durch Klick auf den Link in der E-Mail oder schicken Sie das Fax, welches Sie in Kürze erhalten, unterschrieben zurück.');
+        } else {
+            return \Response::error(ERROR_MSG[$this->lang]['error_newsletter_requirements'], 200);
+        }
     }
 
     /**
@@ -101,10 +113,20 @@ class NewsletterController
         if (!empty($unique)) {
             if ($this->recipientsService->unregisterRecipient($unique)) {
                 $this->mailService->send('unregister_confirm_admin', 'davidpeter1337@gmail.com', ['baseurl' => 'http://upload.panten.de', 'unique' => $unique], 'Wallstreet Freunde-Liste: Austragen erfolgreich!');
-                return \Response::success('User erfolgreich ausgetragen');
+                return \Response::success('User erfolgreich ausgetragen.');
             }
         }
-        return \Response::error('Fehler beim Austragen aus dem Newsletter');
+        return \Response::error('Fehler beim Austragen aus dem Newsletter.');
+    }
+
+    /**
+     * Route zum Auflisten von Empfängern
+     * @return object
+     */
+    public function listAction()
+    {
+        $list = $this->recipientsService->getList(20);
+        return \Response::success($list, $this->data);
     }
 
     /**

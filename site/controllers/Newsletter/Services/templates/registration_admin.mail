@@ -1,0 +1,28 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h3>Ein Kunde hat seine Faxnummer in den Info-Verteiler eingetragen.</h3>
+		Um seine Anmeldung zu verifizieren, rufen Sie den Kunden bitte an und lassen sich seine Info-Verteiler-Anforderung bestätigen.<br>
+		Sie können ihm auch ein von Ihnen vorgefertigtes Fax senden, dass er unterschrieben zurücksenden muss.<br><br>
+		Seine Kontaktdaten:<br>
+		<p>
+		Name: '.$name.'<br>
+		Telefon: '.$telefon.'<br>
+		Telefax: '.$fax.'<br>
+		<p>
+		Wenn der Kunde verifiziert ist, folgen Sie bitte folgendem Link oder kopieren Ihn in die Adresszeile Ihres Browsers:<br>
+		<p>
+		<a href="http://www.wallstreet-hamilton.de/powerlunch_abo/abo_confirm.php?art=fax&code='.md5($fax).'">http://www.wallstreet-hamilton.de/powerlunch_abo/abo_confirm.php?art=fax&code='.md5($fax).'</a>
+		<p>
+		Wenn der Kunde sich wieder austragen will, erledigen Sie das bitte auf der Seite <a href="http://www.wallstreet-hamilton.de/powerlunch_abo.php">http://www.wallstreet-hamilton.de/powerlunch_abo.php</a>.
+		<p>
+		Mit freundlichen Grüßen<br>
+		Webmailer auf www.wallstreet-hamilton.de<br>
+		Bei technischen Fragen wenden Sie sich direkt an Swen Panten.
+		<p>
+		%%PS%%
+        <p>
+		Dies ist eine automatisch generierte E-Mail.
+	</body>
+</html>

@@ -53,8 +53,14 @@ class RecipientsService
      * @param $fax
      * @return mixed
      */
-    public function getRecipient($email, $fax) {
-        $results = $this->newsletterTable->where(['email' => $email])->orWhere(['fax' => $fax])->order('datum DESC');
+    public function getActiveRecipient($email, $fax) {
+        $results = $this->newsletterTable->where(
+            ['email' => $email]
+        )->orWhere(
+            ['fax' => $fax]
+        )->andWhere(
+            ['date_unregister' => NULL]
+        )->order('datum DESC');
         foreach ($results as $recipient) {
             return $recipient;
         }
@@ -84,7 +90,6 @@ class RecipientsService
             'strasse' => $street,
             'ort' => $city,
             'telefon' => $phone,
-            'bestaetigt' => 0,
             'unique' => $unique,
             'date_confirmed' => NULL,
             'date_unregister_request' => NULL,
@@ -101,7 +106,6 @@ class RecipientsService
     public function confirmRecipient($unique) {
         $curDate = new DateTime();
         $this->newsletterTable->values([
-            'bestaetigt' => 1,
             'date_confirmed' => $curDate->getTimestamp()
         ]);
         $this->newsletterTable
@@ -119,10 +123,8 @@ class RecipientsService
      */
 
     public function updateRecipient($unique, $email = '', $fax = '') {
-
         $values = [];
         $curDate = new DateTime();
-
         if (!empty($email)) {
             $values['email'] = $email;
         }
@@ -130,12 +132,11 @@ class RecipientsService
             $values['fax'] = $fax;
         }
         $values['datum'] = $curDate->getTimestamp();
-
+        $values['date_unregister_request'] = NULL;
         $this->newsletterTable
             ->values($values);
         $this->newsletterTable
             ->where(['unique' => $unique]);
-
         $this->newsletterTable->update();
         return $unique;
     }
@@ -148,11 +149,6 @@ class RecipientsService
      */
     public function requestUnregisterRecipient($email, $fax) {
         $curDate = new DateTime();
-        $values = [
-            'date_unregister_request' => $curDate->getTimestamp()
-        ];
-        $this->newsletterTable
-            ->values($values);
         $this->newsletterTable
             ->where('date_unregister_request', '<>', NULL)
             ->andWhere('date_unregister', '<>', NULL)
@@ -162,7 +158,14 @@ class RecipientsService
         foreach ($results as $recipient) {
             $unique = $recipient->unique();
         }
+
+        $values = [
+            'date_unregister_request' => $curDate->getTimestamp()
+        ];
+        $this->newsletterTable
+            ->values($values);
         $this->newsletterTable->update();
+
         return isset($unique) ? $unique : false;
     }
 
