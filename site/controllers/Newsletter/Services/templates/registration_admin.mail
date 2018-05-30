@@ -2,27 +2,30 @@
 	<head>
 	</head>
 	<body>
-		<h3>Ein Kunde hat seine Faxnummer in den Info-Verteiler eingetragen.</h3>
-		Um seine Anmeldung zu verifizieren, rufen Sie den Kunden bitte an und lassen sich seine Info-Verteiler-Anforderung bestätigen.<br>
-		Sie können ihm auch ein von Ihnen vorgefertigtes Fax senden, dass er unterschrieben zurücksenden muss.<br><br>
-		Seine Kontaktdaten:<br>
+	    <h2>Infomail an Admin der Freunde-Liste Wallstreet im Hamilton</h2>
+		<h3>Ein Kunde hat sich für die Freunde-Liste des Wallstreet eingetragen.</h3>
+		%%PS%%
 		<p>
-		Name: '.$name.'<br>
-		Telefon: '.$telefon.'<br>
-		Telefax: '.$fax.'<br>
+		<b>Folgende Daten hat der Kunde angegeben:</b><br>
+        E-Mail: %%email%%<br>
+        Fax: %%fax%%<br>
+        <p>
+        <b>E-Mail-Anmeldung:</b><br>
+		Sie müssen Sie nichts weiter tun, da der Kunde seine Anmeldung selbst über eine Bestätigungs-E-Mail bestätigen kann. Sie werden benachrichtigt, wenn der Kunde seine Anmeldung bestätigt hat.<br>
+		<b>Die Bestätigungs-Mail bitte aufbewahren (egal, ob als Daten oder als Ausdruck)</b>
 		<p>
-		Wenn der Kunde verifiziert ist, folgen Sie bitte folgendem Link oder kopieren Ihn in die Adresszeile Ihres Browsers:<br>
-		<p>
-		<a href="http://www.wallstreet-hamilton.de/powerlunch_abo/abo_confirm.php?art=fax&code='.md5($fax).'">http://www.wallstreet-hamilton.de/powerlunch_abo/abo_confirm.php?art=fax&code='.md5($fax).'</a>
-		<p>
-		Wenn der Kunde sich wieder austragen will, erledigen Sie das bitte auf der Seite <a href="http://www.wallstreet-hamilton.de/powerlunch_abo.php">http://www.wallstreet-hamilton.de/powerlunch_abo.php</a>.
+		<b>Fax-Anmeldung:</b><br>
+		Vorgefertigtes Fax „Mit der Bitte um Rückbestätigung“ an die obige Faxnummer senden.
+        Kunde muss es unterschrieben zurückfaxen oder per Post senden. Diese Einwilligung ist seit der Einführung der DSGVO vom 25.05.2018 notwendig. <b>Das Bestätigungsfax bitte aufbewahren.</b>
+        <p>
+        Wenn der Kunde das Bestätigungsfax zurückgeschickt hat, klicken Sie bitte auf folgenden Link oder kopieren Ihn in die Adresszeile Ihres Browsers:<br>
+        <a href="%%baseurl%%/newsletter/confirm?unique=%%unique%%">%%baseurl%%/confirm?unique=%%unique%%</a><br>
+        <b>Ohne diese von Ihnen vorzunehmende Confirmation wird der Kunde keine Faxe bekommen.</b>
 		<p>
 		Mit freundlichen Grüßen<br>
 		Webmailer auf www.wallstreet-hamilton.de<br>
 		Bei technischen Fragen wenden Sie sich direkt an Swen Panten.
 		<p>
-		%%PS%%
-        <p>
 		Dies ist eine automatisch generierte E-Mail.
 	</body>
 </html>

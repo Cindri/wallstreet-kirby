@@ -1,0 +1,18 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h3>Bestätigung Ihrer Abmeldung von der Freunde-Liste des Wallstreet im Hamilton Baden-Baden</h3>
+		Schade, dass Sie sich von unserer Freunde-Liste abgemeldet haben.<br>
+		Die Abmeldung ist ab sofort aktiv.
+		<p>
+		<h3>Aus Versehen abgemeldet?</h3>
+		Falls Sie nicht von der Freunde-Liste abgemeldet werden möchten, weil Ihre Abmeldung vielleicht versehentlich vorgenommen wurde oder jemand Sie unberechtigt abgemeldet hat, melden Sie sich bitte über unser Formular neu an:<br>
+		<a href="%%baseurl%%/freunde-liste">%%baseurl%%/freunde-liste</a>
+		<p>
+		Mit freundlichen Grüßen<br>
+		Ihr Team vom Wallstreet im Hamilton
+		<p>
+		Dies ist eine automatisch generierte E-Mail.
+	</body>
+</html>

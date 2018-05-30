@@ -24,6 +24,7 @@ l::set('checkout', 'Check out');
 l::set('gallery', 'Gallery');
 
 l::set('email', 'E-mail');
+l::set('vorwahl', 'Primary');
 l::set('fax', 'Fax');
 
 l::set('monday', 'Monday');

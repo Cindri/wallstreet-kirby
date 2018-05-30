@@ -28,6 +28,7 @@ foreach ($allPages as $page) {
         foreach ($page->children() as $powerlunchWeek) {
             $startDate = new \DateTime($powerlunchWeek->start_date());
             $endDate = new \DateTime($powerlunchWeek->end_date());
+            $endDate->modify('+23 hours 59 minutes');
             if ($startDate <= $actualDate && $endDate > $actualDate) {
                 $mainPages->append($page->num(), $page);
                 break;

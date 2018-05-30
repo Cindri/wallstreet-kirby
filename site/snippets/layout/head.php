@@ -5,8 +5,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?= css('http://fonts.googleapis.com/css?family=Playfair+Display:400,700') ?>
-    <?= css('http://fonts.googleapis.com/css?family=PT+Sans:400,700') ?>
+    <?= css('https://fonts.googleapis.com/css?family=Playfair+Display:400,700') ?>
+    <?= css('https://fonts.googleapis.com/css?family=PT+Sans:400,700') ?>
     <?= css('assets/css/animate.css') ?>
     <?= css('assets/css/hover.css') ?>
     <?= css('assets/css/bootstrap.min.css') ?>

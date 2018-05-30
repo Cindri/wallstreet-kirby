@@ -2,12 +2,15 @@
 	<head>
 	</head>
 	<body>
-		<h3>Viele Dank für Ihre Anmeldung beim Info-Verteiler des Wallstreet im Palais Hamilton in Baden-Baden</h3>
-		Um Ihre Anmeldung zu vervollständigen, folgen Sie bitte folgendem Link oder kopieren ihn in die Adresszeile Ihres Browsers:<br>
+		<h3>Bestätigung Ihrer Anmeldung für die Freunde-Liste des Wallstreet im Hamilton Baden-Baden</h3>
+		Schön, dass Sie sich für unsere Freunde-Liste angemeldet haben.
+		<p>
+		Um Ihre Anmeldung abzuschließen, klicken Sie bitte auf den folgenden Link oder kopieren ihn in die Adresszeile Ihres Browsers. Ihre Anmeldung wird erst nach dem Klick auf den Link aktiv:<br>
 		<p>
 		<a href="%%baseurl%%/newsletter/confirm?unique=%%unique%%">%%baseurl%%/newsletter/confirm?unique=%%unique%%</a>
 		<p>
-	    Sollten Sie sich nicht für den Info-Verteiler angemeldet haben, ignorieren Sie bitte diese E-Mail, sie werden dann nicht eingetragen.<br>
+	    Sollten Sie sich nicht für den Info-Verteiler angemeldet haben, ignorieren Sie bitte diese E-Mail, dann werden Sie nicht eingetragen.<br>
+	    <p>
 		Wenn Sie sich wieder austragen wollen, können Sie das einfach auf der Seite <a href="%%baseurl%%/freunde-liste">%%baseurl%%/freunde-liste</a> tun.
 		<p>
 		Mit freundlichen Grüßen<br>

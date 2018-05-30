@@ -28,11 +28,6 @@ fields:
     style: table
     entry: >
       {{name}}: {{price}}
-    default:
-      -
-        name:
-        description:
-        price:
     fields:
       name:
         label: Name der Speise

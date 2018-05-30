@@ -413,6 +413,14 @@
             $(this).blur();
         });
 
+        $('.js-submit-unregister').click(function (event) {
+            event.preventDefault();
+            var $form = $(this).closest('.registration-form');
+            $form.prop('action', $form.data('unregister'));
+            $form.submit();
+            $(this).blur();
+        });
+
         $('.js-registration-form').submit(function(event) {
             event.preventDefault();
 
@@ -427,7 +435,7 @@
                     var alertClass;
                     if (json.status === 'success') {
                         alertClass = 'success';
-                        $form.find('.js-submit-registration').attr('disabled', true);
+                        $form.find('.submit-button').attr('disabled', true);
                     } else {
                         alertClass = 'danger';
                     }

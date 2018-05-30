@@ -1,0 +1,24 @@
+<html>
+	<head>
+	</head>
+	<body>
+	    <h2>Infomail an Admin der Freunde-Liste Wallstreet im Hamilton</h2>
+		<h3>Ein Kunde hat sich aus der Freunde-Liste ausgetragen.</h3>
+		Der Kunde mit der UID %%unique%% hat sich aus der Freunde-Liste ausgetragen.
+		<p>
+		<b>Folgende Daten hat der Kunde angegeben:</b><br>
+        E-Mail: %%email%%<br>
+        Fax: %%fax%%<br>
+        <p>
+        Da Abmeldungen immer sofort greifen müssen, sind keine Aktionen mehr von Ihnen erforderlich.
+        <b>Fax-Abmeldung:</b><br/>
+        Die Faxabmeldung ist ebenfalls sofort gültig. Es wird empfohlen:<br>
+        Vorgefertigtes Fax „Mit der Bitte um Rückbestätigung“ an die obige Faxnummer senden.
+		<p>
+		Mit freundlichen Grüßen<br>
+		Webmailer auf www.wallstreet-hamilton.de<br>
+		Bei technischen Fragen wenden Sie sich direkt an Swen Panten.
+		<p>
+		Dies ist eine automatisch generierte E-Mail.
+	</body>
+</html>

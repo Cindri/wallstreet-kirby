@@ -2,21 +2,16 @@
 
 class MailingService
 {
-    /** @var string  */
-    private $baseUrl = '';
-
     /** @var string */
     private $placeholderDelimiter = '%%';
 
     /**
      * Erstellt den MailingService. Template siehe Dateien im Ordner "templates"
-     * @param string $baseUrl
      * @param string $placeholderDelimiter
      */
-    public function __construct($baseUrl = '', $placeholderDelimiter = '%%')
+    public function __construct($placeholderDelimiter = '%%')
     {
         $this->placeholderDelimiter = $placeholderDelimiter;
-        $this->baseUrl = $baseUrl;
 
 
         // Definiere eigenen E-Mail Adapter
@@ -57,7 +52,7 @@ class MailingService
      */
     public function send($template, $to, $data = [], $subject = 'Wallstreet Powerlunch') {
         if (!empty($template)) {
-            $mailString = $this->getRenderedMailBody($template, array_merge($data, ['baseurl' => $this->baseUrl]));
+            $mailString = $this->getRenderedMailBody($template, $data);
             $owner = c::get('owner');
             $email = email([
                 'to' => $to,

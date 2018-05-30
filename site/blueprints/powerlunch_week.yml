@@ -7,7 +7,7 @@ fields:
     label: Titel
 
   start_date:
-    label: Start-Datum
+    label: Karte online ab (00:00 Uhr, Start spät. Sonntag wg. Faxversand)
     type: date
     format: DD.MM.YYYY
     translate: false
@@ -15,7 +15,23 @@ fields:
     width: 1/2
 
   end_date:
-    label: End-Datum
+    label: Karte online bis (23:59 Uhr, Ende möglichst Freitag)
+    type: date
+    format: DD.MM.YYYY
+    translate: false
+    required: true
+    width: 1/2
+
+  start_date_pdf:
+    label: Powerlunch vom
+    type: date
+    format: DD.MM.YYYY
+    translate: false
+    required: true
+    width: 1/2
+
+  end_date_pdf:
+    label: Powerlunch bis
     type: date
     format: DD.MM.YYYY
     translate: false
@@ -28,11 +44,6 @@ fields:
     style: table
     entry: >
       {{name}}: {{price}}
-    default:
-      -
-        name:
-        description:
-        price:
     fields:
       name:
         label: Name der Speise
@@ -56,11 +67,6 @@ fields:
     style: table
     entry: >
       {{name}}: {{price}}
-    default:
-      -
-        name:
-        description:
-        price:
     fields:
       name:
         label: Name der Speise
@@ -84,11 +90,6 @@ fields:
     style: table
     entry: >
       {{name}}: {{price}}
-    default:
-      -
-        name:
-        description:
-        price:
     fields:
       name:
         label: Name der Speise
@@ -112,11 +113,6 @@ fields:
     style: table
     entry: >
       {{name}}: {{price}}
-    default:
-      -
-        name:
-        description:
-        price:
     fields:
       name:
         label: Name der Speise
@@ -140,11 +136,6 @@ fields:
     style: table
     entry: >
       {{name}}: {{price}}
-    default:
-      -
-        name:
-        description:
-        price:
     fields:
       name:
         label: Name der Speise

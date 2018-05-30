@@ -29,6 +29,7 @@ class PowerlunchService
         $filter = function($week) use ($currentDate) {
             $startDate = new DateTime($week->start_date());
             $endDate = new DateTime($week->end_date());
+            $endDate->modify('+23 hours 59 minutes');
             return ($startDate <= $currentDate && $currentDate <= $endDate);
         };
         /** @var \Kirby\Panel\Models\Page $week */
@@ -49,6 +50,7 @@ class PowerlunchService
 
         $currentWeekStartDate = new DateTime($week->start_date());
         $currentWeekEndDate = new DateTime($week->end_date());
+        $currentWeekEndDate->modify('+23 hours 59 minutes');
 
         $dayCounter = $currentWeekStartDate;
         $mealsOfCurrentWeek = array();
@@ -97,8 +99,13 @@ class PowerlunchService
 
         $currentWeekStartDate = new DateTime($week->start_date());
         $currentWeekEndDate = new DateTime($week->end_date());
+        $currentStartPdf = new DateTime($week->start_date_pdf());
+        $currentEndPdf = new DateTime($week->end_date_pdf());
 
-        return ['start' => $currentWeekStartDate->format('d.m.Y'), 'end' => $currentWeekEndDate->format('d.m.Y')];
+        return ['start' => $currentWeekStartDate->format('d.m.Y'),
+                'end' => $currentWeekEndDate->format('d.m.Y'),
+                'startPdf' => $currentStartPdf->format('d.m.Y'),
+                'endPdf' => $currentEndPdf->format('d.m.Y')];
     }
 
 }

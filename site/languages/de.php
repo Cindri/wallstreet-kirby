@@ -25,6 +25,7 @@ l::set('checkout', 'Abmelden');
 l::set('gallery', 'Galerie');
 
 l::set('email', 'E-Mail');
+l::set('vorwahl', 'Vorwahl');
 l::set('fax', 'Fax');
 //
 

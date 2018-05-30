@@ -19,7 +19,15 @@ class RecipientsService
             'user' => 'db1091580-kdn',
             'password' => 'pantenkunden'
         ]);
-        $this->newsletterTable = $this->db->table('wallstreet_newsletter');
+        $this->newsletterTable = $this->db->table('wallstreet_newsletter_2018');
+    }
+
+    static function debug($debug) {
+        ob_start();
+        var_dump($debug);
+        $out = ob_get_contents();
+        ob_end_clean();
+        file_put_contents('debug.txt', $out);
     }
 
     /**
@@ -54,17 +62,23 @@ class RecipientsService
      * @return mixed
      */
     public function getActiveRecipient($email, $fax) {
-        $results = $this->newsletterTable->where(
-            ['email' => $email]
-        )->orWhere(
-            ['fax' => $fax]
-        )->andWhere(
-            ['date_unregister' => NULL]
-        )->order('datum DESC');
-        foreach ($results as $recipient) {
-            return $recipient;
+        if (!empty($email)) {
+            $this->newsletterTable->where(
+                ['email' => $email]
+            )->andWhere(
+                ['date_unregister' => 0]
+            );
         }
-        return false;
+        if (!empty($fax)) {
+            $this->newsletterTable->orWhere(
+                ['fax' => $fax]
+            )->andWhere(
+                ['date_unregister' => 0]
+            );
+        }
+        $recipient = $this->newsletterTable->order('datum DESC')->first();
+
+        return $recipient;
     }
 
     /**
@@ -90,10 +104,8 @@ class RecipientsService
             'strasse' => $street,
             'ort' => $city,
             'telefon' => $phone,
-            'unique' => $unique,
-            'date_confirmed' => NULL,
-            'date_unregister_request' => NULL,
-            'date_unregister' => NULL
+            'bestaetigt' => 0,
+            'uniqueid' => $unique
         ]);
         return $unique;
     }
@@ -106,10 +118,12 @@ class RecipientsService
     public function confirmRecipient($unique) {
         $curDate = new DateTime();
         $this->newsletterTable->values([
+            'bestaetigt' => 1,
             'date_confirmed' => $curDate->getTimestamp()
         ]);
         $this->newsletterTable
-            ->where(['unique' => $unique]);
+            ->where(['uniqueid' => $unique])
+            ->andWhere(['date_confirmed' => 0 ]);
 
         return $this->newsletterTable->update();
     }
@@ -136,7 +150,7 @@ class RecipientsService
         $this->newsletterTable
             ->values($values);
         $this->newsletterTable
-            ->where(['unique' => $unique]);
+            ->where(['uniqueid' => $unique]);
         $this->newsletterTable->update();
         return $unique;
     }
@@ -149,24 +163,37 @@ class RecipientsService
      */
     public function requestUnregisterRecipient($email, $fax) {
         $curDate = new DateTime();
-        $this->newsletterTable
-            ->where('date_unregister_request', '<>', NULL)
-            ->andWhere('date_unregister', '<>', NULL)
-            ->andWhere(['email' => $email])
-            ->orWhere(['fax' => $fax]);
-        $results = $this->newsletterTable->select('unique');
-        foreach ($results as $recipient) {
-            $unique = $recipient->unique();
+
+        // Erstelle zuerst den Query, der den korrekten Datensatz auswählt. Er darf alte Anmeldungen nicht manipulieren
+        if (!empty($email)) {
+            $this->newsletterTable
+                ->orWhere(['email' => $email])
+                ->andWhere(['date_unregister_request' => 0])
+                ->andWhere(['date_unregister' => 0]);
+        }
+        if (!empty($fax)) {
+            $this->newsletterTable
+                ->orWhere(['fax' => $fax])
+                ->andWhere(['date_unregister_request' => 0])
+                ->andWhere(['date_unregister' => 0]);
+        }
+        $recipient = $this->newsletterTable->select('uniqueid')->first();
+
+        if (empty($recipient)) {
+            return false;
         }
 
+        $unique = $recipient->uniqueid();
         $values = [
-            'date_unregister_request' => $curDate->getTimestamp()
+            'date_unregister_request' => $curDate->getTimestamp(),
+            'date_unregister' => $curDate->getTimestamp(),
+            'bestaetigt' => 0
         ];
         $this->newsletterTable
-            ->values($values);
+            ->values($values)
+            ->where(['uniqueid' => $unique]);
         $this->newsletterTable->update();
-
-        return isset($unique) ? $unique : false;
+        return $unique;
     }
 
     /**
@@ -177,7 +204,10 @@ class RecipientsService
     public function unregisterRecipient($unique) {
         $curDate = new DateTime();
         $values['date_unregister'] = $curDate->getTimestamp();
-        $this->newsletterTable->where(['unique' => $unique]);
+        $values['bestaetigt'] = 0;
+        $this->newsletterTable->values($values);
+        $this->newsletterTable->where('date_unregister_request', '<>', 0);
+        $this->newsletterTable->andWhere(['uniqueid' => $unique]);
         return $this->newsletterTable->update();
     }
 
@@ -196,6 +226,62 @@ class RecipientsService
         }
 
         return $this->newsletterTable->where($type . '_md5', '=', $code)->delete();
+    }
+
+
+    // Statische Hilfsfunktionen
+
+
+    /**
+     * Validiert die Formulareingaben bei der Registrierung / Abmeldung
+     * @param string $email
+     * @param string $vorwahl
+     * @param string $fax
+     * @return bool
+     */
+    public static function validateRegistration($email, $vorwahl, $fax) {
+        $regexVorwahl = '/((\+|00)\d{1,3}|0)\s{0,1}\d{2,6}/';
+        $regexFax = '/(\d|\s){3,12}/';
+        $matchEmail = true;
+        if (!empty($email)) {
+            $matchEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+        }
+        $matchVorwahl = true;
+        if (!empty($vorwahl)) {
+            $matchVorwahl = boolval(preg_match($regexVorwahl, $vorwahl));
+        }
+        $matchFax = true;
+        if (!empty($fax)) {
+            $matchFax = boolval(preg_match($regexFax, $fax));
+        }
+
+        $result = ($matchVorwahl && $matchFax && $matchEmail);
+
+        return $result;
+    }
+
+    /**
+     * Normalisiert eingegebene Faxnummer zu gleicher Form (um Duplikate bei verschiedene Eingabeformaten auszuschließen)
+     * @param $vorwahl
+     * @param $fax
+     * @return string
+     */
+    public static function normalizeFax($vorwahl, $fax) {
+        $realVorwahl = str_replace('+', '00', $vorwahl);
+        $realVorwahl = str_replace(' ', '', $realVorwahl);
+
+        $realFax = str_replace(' ', '', $fax);
+
+        return $realVorwahl . $realFax;
+    }
+
+    private static function checkMatch($is, $match) {
+        if ($is) {
+            if (!$match) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

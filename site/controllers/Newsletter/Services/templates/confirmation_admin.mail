@@ -2,13 +2,8 @@
 	<head>
 	</head>
 	<body>
-		<h3>Viele Dank für Ihre Anmeldung beim Info-Verteiler des Wallstreet im Palais Hamilton in Baden-Baden</h3>
-		Um Ihre Anmeldung zu vervollständigen, folgen Sie bitte folgendem Link oder kopieren ihn in die Adresszeile Ihres Browsers:<br>
-		<p>
-		<a href="http://www.wallstreet-hamilton.de/powerlunch_abo/abo_confirm.php?art=email&code=%%code%%">http://www.wallstreet-hamilton.de/powerlunch_abo/abo_confirm.php?art=email&code=%%code%%</a>
-		<p>
-		Sollten Sie sich nicht für den Info-Verteiler angemeldet haben, ignorieren Sie bitte diese E-Mail, sie werden dann nicht eingetragen.<br>
-		Wenn Sie sich wieder austragen wollen, können Sie das einfach auf der Seite <a href="http://www.wallstreet-hamilton.de/powerlunch_abo.php">http://www.wallstreet-hamilton.de/powerlunch_abo.php</a> tun.
+		<h3>Ein Kunde hat seine Anmeldung für die Wallstreet Freunde-Liste bestätigt.</h3>
+		Seine eindeutige ID lautet: %%unique%%
 		<p>
 		Mit freundlichen Grüßen<br>
 		Ihr Team vom Wallstreet im Hamilton
