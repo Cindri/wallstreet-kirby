@@ -100,10 +100,6 @@ class RecipientsService
             'fax' => $fax,
             'email_md5' => md5($email),
             'fax_md5' => md5($fax),
-            'name' => $name,
-            'strasse' => $street,
-            'ort' => $city,
-            'telefon' => $phone,
             'bestaetigt' => 0,
             'uniqueid' => $unique
         ]);
@@ -146,7 +142,7 @@ class RecipientsService
             $values['fax'] = $fax;
         }
         $values['datum'] = $curDate->getTimestamp();
-        $values['date_unregister_request'] = NULL;
+        $values['date_unregister_request'] = 0;
         $this->newsletterTable
             ->values($values);
         $this->newsletterTable
@@ -273,15 +269,6 @@ class RecipientsService
         $realFax = str_replace(' ', '', $fax);
 
         return $realVorwahl . $realFax;
-    }
-
-    private static function checkMatch($is, $match) {
-        if ($is) {
-            if (!$match) {
-                return false;
-            }
-        }
-        return true;
     }
 
 }
