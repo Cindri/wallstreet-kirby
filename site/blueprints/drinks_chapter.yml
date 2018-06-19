@@ -40,11 +40,9 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
       image:
         label: Bild der Speise
         type: image
-        translate: false
 
 
 pages: false

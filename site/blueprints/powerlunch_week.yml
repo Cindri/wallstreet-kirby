@@ -60,7 +60,6 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
   tuesday:
     label: Dienstag
     type: structure
@@ -83,7 +82,6 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
   wednesday:
     label: Mittwoch
     type: structure
@@ -106,7 +104,6 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
   thursday:
     label: Donnerstag
     type: structure
@@ -129,7 +126,6 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
   friday:
     label: Freitag
     type: structure
@@ -152,7 +148,6 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
 
 icon: calendar
 pages: false

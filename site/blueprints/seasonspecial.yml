@@ -44,7 +44,6 @@ fields:
         label: Preis
         type: number
         step: .1
-        translate: false
 
 icon: star
 pages: false
