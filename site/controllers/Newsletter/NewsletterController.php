@@ -23,6 +23,9 @@ class NewsletterController
     /** @var string */
     private $baseUrl;
 
+    /** @var string */
+    private $adminMailRecipient;
+
     public function __construct($lang = 'de', $data = [])
     {
         $this->lang = $lang;
@@ -31,6 +34,8 @@ class NewsletterController
         $this->powerlunchService = new PowerlunchService($lang);
         $this->mailService = new MailingService();
         $this->baseUrl = site()->url();
+
+        $this->adminMailRecipient = 'owner';
     }
 
     /**
@@ -58,26 +63,40 @@ class NewsletterController
 
         // Ist für die E-Mail-Adresse und/oder Fax-Nummer bereits ein Datensatz angelegt? Falls ja: Ist er "abgeschlossen", d.h. ausgetragen? Falls nein: Update! Ansonsten neuer Datensatz
         if ($recipient = $this->recipientsService->getActiveRecipient($email, $fax)) {
+            // Empfänger ist schon eingetragen
             if (!empty($recipient->date_unregister())) {
+                // Es gibt den Datensatz zum Empfänger, er ist aber abgemeldet. -> Neuer Datensatz anlegen und entsprechende Mails versenden
                  $unique = $this->recipientsService->addNewRecipient($email, $fax);
                  if (!empty($email)) {
                      $this->mailService->send('registration_customer', $email, ['baseurl' => $this->baseUrl, 'unique' => $unique], 'Bestätigung der Anmeldung für Freunde-Liste Wallstreet im Hamilton');
                  }
-                 $this->mailService->send('registration_admin', c::get('owner')['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Neue Anmeldung!'], 'Infomail Freunde-Liste Wallstreet im Hamilton');
+                 $this->mailService->send('registration_admin', c::get($this->adminMailRecipient)['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Aktualisierte Anmeldung!'], 'Infomail Freunde-Liste Wallstreet im Hamilton');
             }
             else {
+                // Empfänger ist schon eingetragen und nicht abgemeldet
                 $unique = $this->recipientsService->updateRecipient($recipient->uniqueid(), $email, $fax);
-                if (!empty($email)) {
-                    $this->mailService->send('update_registration_customer', $email, ['baseurl' => $this->baseUrl, 'unique' => $unique, 'PS' => ''], 'Ihre Anmeldung Freunde-Liste Wallstreet im Hamilton');
+                if (empty($recipient->bestaetigt()) && empty($recipient->date_confirmed())) {
+                    // Empfänger hat sich schon einmal angemeldet (ist eingetragen), hat aber nicht bestätigt
+                    if (!empty($email)) {
+                        $this->mailService->send('registration_customer', $email, ['baseurl' => $this->baseUrl, 'unique' => $unique], 'Bestätigung der Anmeldung für Freunde-Liste Wallstreet im Hamilton');
+                    }
+                    $this->mailService->send('registration_admin', c::get($this->adminMailRecipient)['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Neue Anmeldung (alte nicht bestätigt)!'], 'Infomail Freunde-Liste Wallstreet im Hamilton');
+                }
+                else {
+                    // Empfänger ist eingetragen, bestätigt und nicht abgemeldet
+                    if (!empty($email)) {
+                        $this->mailService->send('update_registration_customer', $email, ['baseurl' => $this->baseUrl, 'unique' => $unique, 'PS' => ''], 'Ihre Anmeldung Freunde-Liste Wallstreet im Hamilton');
+                    }
                 }
             }
         }
         else {
+            // Empfänger ist noch nicht eingetragen
             $unique = $this->recipientsService->addNewRecipient($email, $fax);
             if (!empty($email)) {
                 $this->mailService->send('registration_customer', $email, ['baseurl' => $this->baseUrl, 'unique' => $unique], 'Bestätigung der Anmeldung für Freunde-Liste Wallstreet im Hamilton');
             }
-            $this->mailService->send('registration_admin', c::get('owner')['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Neue Anmeldung!'], 'Infomail Freunde-Liste Wallstreet im Hamilton');
+            $this->mailService->send('registration_admin', c::get($this->adminMailRecipient)['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique, 'PS' => 'Neue Anmeldung!'], 'Infomail Freunde-Liste Wallstreet im Hamilton');
         }
 
         if ($unique) {
@@ -98,7 +117,7 @@ class NewsletterController
 
         if (!empty($unique)) {
             if ($this->recipientsService->confirmRecipient($unique)) {
-                $this->mailService->send('confirmation_admin', c::get('owner')['mail'], ['unique' => $unique]);
+                $this->mailService->send('confirmation_admin', c::get($this->adminMailRecipient)['mail'], ['unique' => $unique]);
                 return new Response('Ihre Eintragung wurde erfolgreich bestätigt. Sie sind nun in die Freunde-Liste des Wallstreet im Hamilton aufgenommen.');
             }
         }
@@ -132,11 +151,10 @@ class NewsletterController
             if (!empty($email)) {
                 $this->mailService->send('unregister_request_customer', strval($email), ['baseurl' => $this->baseUrl, 'unique' => $unique], 'Abmeldung Freunde-Liste Wallstreet im Hamilton');
             }
-            $this->mailService->send('unregister_request_admin', c::get('owner')['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique], 'Infomail Freunde-Liste Wallstreet im Hamilton');
+            $this->mailService->send('unregister_request_admin', c::get($this->adminMailRecipient)['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax, 'unique' => $unique], 'Infomail Freunde-Liste Wallstreet im Hamilton');
             return \Response::success('Ihre Abmeldung war erfolgreich!');
         } else {
-            $this->mailService->send('unregister_request_admin', c::get('owner')['mail'], ['baseurl' => $this->baseUrl, 'email' => $email, 'fax' => $fax], 'Infomail Freunde-Liste Wallstreet im Hamilton');
-            return \Response::success('Ihre Abmeldung war erfolgreich!');
+            return \Response::error(ERROR_MSG[$this->lang]['newsletter_registration_fail'], 200);
         }
     }
 
