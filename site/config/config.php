@@ -17,9 +17,7 @@ for more information: http://getkirby.com/license
 
 */
 
-c::set('license', 'put your license key here');
-
-c::set('debug', true);
+c::set('license', 'K2-PRO-f67008aa16f6cc80204e754e973aa12b');
 
 c::set('markdown.extra', true);
 
@@ -30,7 +28,7 @@ c::set('ssl', true);
 // Einstellungen Newsletter-System
 
 c::set('owner', [
-    'mail' => 's.panten@panten.de',
+    'mail' => 'info@wallstreet-hamilton.de',
     'company' => 'Wallstreet im Hamilton',
     'prename' => 'Frank',
     'surname' => 'Schweikart'
@@ -72,3 +70,5 @@ c::set('languages', [
 ]);
 
 include('routes.php');
+
+include('hooks.php');
