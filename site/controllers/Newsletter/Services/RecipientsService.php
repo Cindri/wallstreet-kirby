@@ -56,6 +56,16 @@ class RecipientsService
     }
 
     /**
+     * Gibt alle (oder die ersten $limit) Empfänger im Verteiler als Objekt zurück
+     * @param int $limit
+     * @return string
+     */
+    public function getRecipients($limit = 0) {
+        $results = $this->newsletterTable->limit($limit)->all();
+        return $results;
+    }
+
+    /**
      * Gibt die ID eines Empfängers mit einer E-Mail oder Faxnummer zurück
      * @param $email
      * @param $fax

@@ -2,6 +2,7 @@
 
 require_once('Services/RecipientsService.php');
 require_once('Services/PowerlunchService.php');
+require_once('Services/AuthService.php');
 
 
 class NewsletterController
@@ -183,6 +184,13 @@ class NewsletterController
     {
         $list = $this->recipientsService->getList(20);
         return \Response::success($list, $this->data);
+    }
+
+    public function testAction() {
+        if (AuthService::checkIsLoggedIn()) {
+            return \Response::success();
+        }
+        return \Response::error();
     }
 
     /**
