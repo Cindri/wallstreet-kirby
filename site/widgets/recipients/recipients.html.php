@@ -13,34 +13,60 @@
         font-size:9pt;
     }
 
-    table.recipients td {
+    table.recipients td, table.recipients th {
         border: 1px solid darkgray;
         padding:2px;
-        max-width:160px;
         overflow-x: hidden;
     }
+
 </style>
 
 <script type="text/javascript">
-    function del(obj) {
+
+    function signout(obj) {
+        if (!confirm('Sicher dass Sie den Nutzer vom Newsletter abmelden möchten? Dieser Vorgang kann nur vom Entwickler rückgängig gemacht werden!')) {
+            return false;
+        }
         var $obj = $(obj);
+        var id = $obj.parent().parent().prop('id');
         var recipientUid = $obj.parent().parent().data('recipientuid');
 
         $.get(
-            '<?= site()->url() . '/newsletter/test' ?>',
-            { unique: recipientUid }
+            '<?= site()->url() . '/newsletter/signout' ?>',
+            { unique: recipientUid },
+            function(data) {
+                $('.recipients').find('#' + id).css('text-decoration', 'line-through');
+            }
         );
     }
+
+    function deleteData(obj) {
+        if (!confirm('Sicher dass Sie den Datensatz des Nutzers? Dieser Vorgang kann nicht rückgängig gemacht werden, auch nicht vom Entwickler!')) {
+            return false;
+        }
+        var $obj = $(obj);
+        var id = $obj.parent().parent().prop('id');
+        var recipientUid = $obj.parent().parent().data('recipientuid');
+
+        $.get(
+            '<?= site()->url() . '/newsletter/delete' ?>',
+            { unique: recipientUid },
+            function(data) {
+                $('.recipients').find('#' + id).hide();
+            }
+        );
+    }
+
 </script>
 
 <table class="recipients">
     <tr>
         <th>E-Mail</th>
         <th>Fax</th>
-        <th>Angemeldet am</th>
-        <th>Bestätigt am</th>
-        <th>Abgemeldet am</th>
-        <th>Optionen</th>
+        <th>Anmeldung</th>
+        <th>Bestätigung</th>
+        <th>Abmeldung</th>
+        <th>Aktion</th>
     </tr>
 <?php
 foreach ($recipients as $recipient):
@@ -51,7 +77,10 @@ foreach ($recipients as $recipient):
         <td><?= DateTime::createFromFormat('U', $recipient->datum())->format('d.m.Y'); ?></td>
         <td><?= DateTime::createFromFormat('U', $recipient->date_confirmed())->format('d.m.Y'); ?></td>
         <td><?= DateTime::createFromFormat('U', $recipient->date_unregister())->format('d.m.Y'); ?></td>
-        <td><i class="icon fa fa-trash" onclick="del(this)"></i></td>
+        <td>
+            <i class="icon fa fa-times" style="color:darkorange; cursor:pointer;" onclick="signout(this)"></i>
+            <i class="icon fa fa-trash" style="color:darkred; cursor:pointer;" onclick="deleteData(this)"></i>
+        </td>
     </tr>
 <?php
 endforeach;

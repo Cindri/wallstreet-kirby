@@ -219,19 +219,14 @@ class RecipientsService
 
     /**
      * Löscht den Datensatz eines Empfänger aus dem Verteiler
-     * @param $code
-     * @param $type
+     * @param $unique
      * @return bool
      */
-    public function deleteRecipient($code, $type) {
-        if (empty($code)) {
+    public function deleteRecipient($unique) {
+        if (empty($unique)) {
             return false;
         }
-        if (!in_array($type, ['email', 'fax'])) {
-            return false;
-        }
-
-        return $this->newsletterTable->where($type . '_md5', '=', $code)->delete();
+        return $this->newsletterTable->where('uniqueid', '=', $unique)->delete();
     }
 
 

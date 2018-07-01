@@ -177,6 +177,26 @@ class NewsletterController
     }
 
     /**
+     * Route zum Löschen von Datensätzen. Nicht von außen aufrufbar!
+     * @return object
+     */
+    public function deleteAction()
+    {
+        if (!AuthService::checkIsLoggedIn()) {
+            return \Response::error();
+        }
+
+        $unique = get('unique', '');
+
+        if (!empty($unique)) {
+            if ($this->recipientsService->deleteRecipient($unique)) {
+                return new Response('User erfolgreich gelöscht.');
+            }
+        }
+        return new Response('Fehler beim Löschen aus dem Newsletter.');
+    }
+
+    /**
      * Route zum Auflisten von Empfängern
      * @return object
      */
@@ -184,13 +204,6 @@ class NewsletterController
     {
         $list = $this->recipientsService->getList(20);
         return \Response::success($list, $this->data);
-    }
-
-    public function testAction() {
-        if (AuthService::checkIsLoggedIn()) {
-            return \Response::success();
-        }
-        return \Response::error();
     }
 
     /**
