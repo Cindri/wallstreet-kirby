@@ -61,7 +61,7 @@ class RecipientsService
      * @return string
      */
     public function getRecipients($limit = 0) {
-        $results = $this->newsletterTable->limit($limit)->all();
+        $results = $this->newsletterTable->order('email asc, fax asc')->limit($limit)->all();
         return $results;
     }
 

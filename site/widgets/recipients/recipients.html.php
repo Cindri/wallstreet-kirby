@@ -61,26 +61,25 @@
 
 <table class="recipients">
     <tr>
+        <th>ID</th>
         <th>E-Mail</th>
         <th>Fax</th>
         <th>Anmeldung</th>
         <th>Bestätigung</th>
         <th>Abmeldung</th>
-        <th>Aktion</th>
+        <th>Aktiv?</th>
     </tr>
 <?php
 foreach ($recipients as $recipient):
     ?>
     <tr data-recipientuid="<?= $recipient->uniqueid() ?>" id="recipient-<?= $recipient->ID() ?>">
+        <td title="<?= $recipient->ID() ?>"><?= $recipient->ID() ?></td>
         <td title="<?= $recipient->email() ?>"><?= $recipient->email() ?></td>
         <td title="<?= $recipient->fax() ?>"><?= $recipient->fax() ?></td>
         <td><?= DateTime::createFromFormat('U', $recipient->datum())->format('d.m.Y'); ?></td>
         <td><?= DateTime::createFromFormat('U', $recipient->date_confirmed())->format('d.m.Y'); ?></td>
         <td><?= DateTime::createFromFormat('U', $recipient->date_unregister())->format('d.m.Y'); ?></td>
-        <td>
-            <i class="icon fa fa-times" style="color:darkorange; cursor:pointer;" onclick="signout(this)"></i>
-            <i class="icon fa fa-trash" style="color:darkred; cursor:pointer;" onclick="deleteData(this)"></i>
-        </td>
+        <td><?= boolval($recipient->bestaetigt()) ? '<i class="icon fa fa-check" style="color:greenyellow; cursor:pointer;"></i>' : '<i class="icon fa fa-times" style="color:red; cursor:pointer;"></i>' ?></td>
     </tr>
 <?php
 endforeach;
