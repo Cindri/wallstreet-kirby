@@ -21,7 +21,7 @@ c::set('license', 'K2-PRO-f67008aa16f6cc80204e754e973aa12b');
 
 c::set('markdown.extra', true);
 
-c::set('ssl', true);
+c::set('debug', true);
 
 
 
