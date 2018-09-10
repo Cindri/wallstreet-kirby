@@ -229,6 +229,45 @@ class RecipientsService
         return $this->newsletterTable->where('uniqueid', '=', $unique)->delete();
     }
 
+    /**
+     * DSGVO: Löscht alle Datensätze, die sich nur einmalig registriert und nie bestätigt haben (und sonst nicht interagierten)
+     * @return mixed
+     */
+    public function deleteUnconfirmedRecipients() {
+        $ids = $this->newsletterTable
+            ->where(['bestaetigt' => 0])
+            ->andWhere(['date_confirmed' => 0])
+            ->andWhere(['date_unregister_request' => 0])
+            ->andWhere(['date_unregister' => 0])
+            ->select('ID')->all();
+        $this->newsletterTable
+            ->where(['bestaetigt' => 0])
+            ->andWhere(['date_confirmed' => 0])
+            ->andWhere(['date_unregister_request' => 0])
+            ->andWhere(['date_unregister' => 0])
+            ->delete();
+        return $ids;
+    }
+
+    /**
+     * DSGVO: Löscht alle Datensätze, deren Abmeldung älter ist als 3 Jahre
+     */
+    public function deleteOldUnregisteredRecipients() {
+        $curDate = new DateTime();
+        $timestamp3YearsAgo = $curDate->modify('-3 years')->format('U');
+        $ids = $this->newsletterTable
+            ->where('bestaetigt', '=', '0')
+            ->andWhere('date_unregister', '<>', '0')
+            ->andWhere('date_unregister', '<', $timestamp3YearsAgo)
+            ->select('ID')->all();
+        $this->newsletterTable
+            ->where('bestaetigt', '=', '0')
+            ->andWhere('date_unregister', '<>', '0')
+            ->andWhere('date_unregister', '<', $timestamp3YearsAgo)
+            ->delete();
+        return $ids;
+    }
+
 
     // Statische Hilfsfunktionen
 

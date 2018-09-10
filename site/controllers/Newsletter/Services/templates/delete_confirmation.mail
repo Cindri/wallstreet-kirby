@@ -1,0 +1,48 @@
+<html>
+	<head>
+	</head>
+	<body>
+        <h1>Löschungsbestätigung von Datensätzen</h1>
+        Von der Freunde-Liste des Wallstreet im Hamilton wurden die Datensätze mit den nachfolgenden Datensatznummern automatisiert gelöscht:
+        <p>
+        %%IDList%%
+        <p>
+        <h2>Begründung:</h2>
+        Es erfolgte keine Bestätigung der Anmeldung (fehlendes Double-Opt-In) innerhalb eines Monats nach der Anmeldung.<br/>
+        oder<br/>
+        Die Abmeldung von der Freundliste liegt außerhalb der Aufbewahrungsfrist von 3 Jahren.
+        <p>
+        Schriftliche und/oder elektronische Unterlagen zu den obigen Datensatznummern, die aufgrund von Nachweispflichten aufbewahrt wurden, sind zu vernichten.
+        <p>
+        Die Vernichtung dieser Unterlagen wird auf einem Ausdruck dieser E-Mail mit Datum und Unterschrift des für die Verarbeitung der Daten Zuständigen protokolliert.
+        <p>
+        Dieser Ausdruck ist aufzubewahren, nach Wissenstand vom Mai 2018 für 10 Jahre. Sollte sich diese Frist aufgrund gesetzlicher Vorgaben ändern, sind die gesetzlichen Aufbewahrungsfristen zugrunde zu legen.
+        <p><p>
+        Die Löschung von schriftlichen und/oder elektronischen Unterlagen zu obigen Datensatznummern wird hiermit bestätigt:
+        <p>
+        <br><br><br>
+
+        <table>
+            <tr>
+                <td>
+                    _____________
+                </td>
+                <td>
+                    __________________________________________
+                </td>
+            </tr>
+            <tr>
+                 <td>
+                    Datum
+                 </td>
+                 <td>
+                    Unterschrift
+                 </td>
+             </tr>
+         </table>
+
+         <p>
+         <br>
+        <small>Diese E-Mail wurde vom Datenbanksystem von www.wallstreet-hamilton.de automatisch erzeugt. Technische Rückfragen bitte an www.panten.de</small>
+	</body>
+</html>

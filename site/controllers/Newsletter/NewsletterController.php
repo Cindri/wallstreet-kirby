@@ -169,7 +169,7 @@ class NewsletterController
 
         if (!empty($unique)) {
             if ($this->recipientsService->unregisterRecipient($unique)) {
-                $this->mailService->send('unregister_confirm_admin', 'davidpeter1337@gmail.com', ['baseurl' => $this->baseUrl, 'unique' => $unique], 'Wallstreet Freunde-Liste: Austragen erfolgreich!');
+                $this->mailService->send('unregister_confirm_admin', c::get($this->adminMailRecipient)['mail'], ['baseurl' => $this->baseUrl, 'unique' => $unique], 'Wallstreet Freunde-Liste: Austragen erfolgreich!');
                 return new Response('User erfolgreich ausgetragen.');
             }
         }
@@ -239,6 +239,29 @@ class NewsletterController
         }
 
         return Response::json($apiData);
+    }
+
+    /**
+     * Crojob-Route zum Leeren von Datensätzen
+     */
+    public function cleanupAction() {
+        $cleanupCode = get('code', '');
+        if ($cleanupCode == '') {
+            $deletedIDList = [];
+            $return = $this->recipientsService->deleteUnconfirmedRecipients();
+            foreach ($return as $obj) {
+                $deletedIDList[] = $obj->uniqueid();
+            }
+            $return = $this->recipientsService->deleteOldUnregisteredRecipients();
+            foreach ($return as $obj) {
+                $deletedIDList[] = $obj->uniqueid();
+            }
+
+            $deletedIdString = implode('<br>', $deletedIDList);
+            $this->mailService->send('delete_confirmation', c::get($this->adminMailRecipient)['mail'], ['IDList' => $deletedIdString], 'Wallstreet Freunde-Liste: Löschbestätigung der Datensätze');
+            return Response::success($deletedIdString);
+        }
+        return Response::error();
     }
 
 }
