@@ -6,6 +6,11 @@ fields:
     type: text
     label: Titel
 
+  preview:
+    type: url
+    label: Vorschau
+    readonly: true
+
   start_date:
     label: Karte online ab (00:00 Uhr, Start spät. Sonntag wg. Faxversand)
     type: date

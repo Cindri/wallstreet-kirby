@@ -39,3 +39,13 @@ kirby()->hook('panel.page.update', function($page, $oldPage = null) {
         }
     }
 });
+
+kirby()->hook('panel.page.update', function($page, $oldPage = null) {
+    /** @var Page $page */
+    if ($page->parent()->uid() == "powerlunch") {
+
+        $pdfPreviewUrl = 'http://extern.panten.de/wallstreet/showCurrentPdf.php?start=' . $page->start_date() . '&code=news1988';
+        $page->update(['preview' => $pdfPreviewUrl]);
+    }
+});
+

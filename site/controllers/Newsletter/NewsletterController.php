@@ -212,8 +212,9 @@ class NewsletterController
      */
     public function apiPowerlunchListAction()
     {
+        $startDate = get('start', '');
         /** @var \Kirby\Panel\Models\Page $week */
-        $week = $this->powerlunchService->getCurrentWeek();
+        $week = $this->powerlunchService->getCurrentWeek($startDate);
 
         $mealDays = $this->powerlunchService->getMealsOfCurrentWeek($week);
 

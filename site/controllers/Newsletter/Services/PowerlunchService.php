@@ -21,11 +21,16 @@ class PowerlunchService
 
     /**
      * Gibt die aktuelle Powerlunch-Woche zurück
+     * @param string $start Das Startdatum, falls abweichende Woche statt aktueller ausgegeben werden soll
      * @return Page
      */
-    public function getCurrentWeek() {
+    public function getCurrentWeek($start = "") {
         $allWeeks = $this->powerlunchPage->children();
-        $currentDate = new DateTime();
+        if (!empty($start)) {
+            $currentDate = new DateTime($start);
+        } else {
+            $currentDate = new DateTime();
+        }
         $filter = function($week) use ($currentDate) {
             $startDate = new DateTime($week->start_date());
             $endDate = new DateTime($week->end_date());
