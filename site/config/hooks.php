@@ -30,8 +30,9 @@
 //    }
 //});
 
+
 kirby()->hook('panel.page.update', function($page, $oldPage = null) {
-    if (in_array($page->parent()->uid(), ['speisen', 'getraenke']) && $this->site()->language()->code() == 'de') {
+    if (in_array($page->parent()->uid(), ['speisen', 'getraenke']) && $page->uid() != 'download' && $this->site()->language()->code() == 'de') {
         /** @var Page $page */
         if (!empty($filepath = $page->textfile(null, 'en'))) {
             f::remove($filepath);
