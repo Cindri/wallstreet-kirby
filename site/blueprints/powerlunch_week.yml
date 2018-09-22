@@ -8,7 +8,7 @@ fields:
 
   preview:
     type: url
-    label: Vorschau
+    label: Vorschau (zum Ansehen des PDFs diesen Link in die Adresszeile Ihres Browsers kopieren)
     readonly: true
 
   start_date:
